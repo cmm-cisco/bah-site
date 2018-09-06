@@ -190,411 +190,68 @@
 
 
 <div class="container">
-<h1>Configure base Operating System on Controller</h1>
-    <p>As with any Linux application installation, there are some operating system parameters that need to be modified
-    to facilitate the operation of your application.  Adjustments to the firewall and NTP are required for an
-    operational OpenStack deployment. We have grouped the requirements ahead of each component installation of
-    OpenStack.</p>
-<h2>Use of RedHat Enterprise Linux for this lab</h2>
-    <p>RedHat Enterprise Linux (RHEL) is the preferred distribution of many Enterprise
-    accounts. That being said, OpenStack can be installed on many different Linux distributions, including Canonical's
-    Ubuntu. Please refer to Cisco's documentation for instructions on how to integrate with other Cisco products
-        leveraging their respectives plugins at
-    <a href="http://www.cisco.com/go/openstack">http://www.cisco.com/go/openstack</a></p>
-<div class="clearfix"></div>
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-<p>In this lab, you will have access to one UCS-C220 host to run OpenStack. This node will run the OpenStack
-    Controller, the Openstack Compute and the Openstack Network in the same UCS-C220. This will allow us to take the
-    All-In-One (AIO) approach. It is important to note that in a production environment, you
-    will have many compute nodes on which you will be running your OpenStack instances (vm's). Plus dedicated nodes
-    for different Openstack functions. </p>
+<h1>Active Reconnaissance</h1>
+    <p>You need t figure out the network topology in your own (as part of this exercise/module). However, the following are the instructions on how to connect to the lab:</p>
 
-<p>Perform OS modifications on your AIO Node by connecting to <b>pod01-compute1 </b> in PuTTY
-    Connection Manager.</p>
+<img src="os_files/topology.png" width="80%" height="80%">
+<hr>
+<h2> Exercise 1: Using NMAP </h2>
 
-<h3>Step 1 - Configure NTP for proper time synchronization</h3>
-<p>In OpenStack it is <strong>critical</strong> to have proper time synchronization across each of the component hosts.
-    In RHEL the default time protocol is called Chrony. Chrony is a variation of the NTPd engine of linux that is
-    designed for dis-association of NTP resources ( for example laptops that lose access to their network clocks ).
-    In your OpenStack environment you can run either Chrony or NTPd as needed. For the purpose of this lab we will
-    be using chrony and it has been pre-configured for you.</p>
+<p>Open a terminal session in your Kali box and type <strong>nmap</strong>.</p>
 
 
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        1
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button>
-    </div>
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Nmap Options</div>
+  <div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 1 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button></div>
 <div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
-<pre># This is the copy group: 1<br>
-
-<code>
-systemctl status chronyd
-</code>
-
+  <!-- put the code here -->
+<pre>
+nmap -h
 </pre>
-</div>
-</div>
+</div></div>
+<!-- end of copy /paste block -->
 
 
+<h3>Task 1</h3>
+Using nmap try to learn the hosts that are active in your network and all the "victims" you can find
+Constrain your search to 192.168.1.0/24 and 192.168.2.0/24
+
+<h3>Task 2</h3>
+<p>Once you find all the active hosts, try to find all the open TCP and UDP ports on those machines.</p>
+<p>nmap doesn't scan all ports by default. It limits itself to 1000 or so common ports. Figure out how to override this.<p>
+<p>UDP takes a &nbsp;<strong>long</strong>&nbsp;time. You might defer that scan for later.</p>
+
+<h3>Task 3</h3>
+Add Server Version checks (-sV) to gain more information.</p>
 
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-<div class="commandblock">
-<div class="">
-<pre><strong>pod01-compute1#</strong> systemctl status chronyd
-chronyd.service - NTP client/server
-   Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled)
-   Active: <b><span style="color:green">active (running)</span> </b> since Mon 2015-10-12 11:20:09 EDT; 59s ago
-  Process: 25969 ExecStartPost=/usr/libexec/chrony-helper add-dhclient-servers (code=exited, status=0/SUCCESS)
-  Process: 25966 ExecStart=/usr/sbin/chronyd -u chrony $OPTIONS (code=exited, status=0/SUCCESS)
- Main PID: 25968 (chronyd)
-   CGroup: /system.slice/chronyd.service
-           └─25968 /usr/sbin/chronyd -u chrony
-
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com systemd[1]: Starting NTP client/server...
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: chronyd version 1.29.1 starting
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: Linux kernel major=3 minor=10 patch=0
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: hz=100 shift_hz=7 freq_scale=1.00000000 nominal_tick=1...l=2
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: Frequency -78.309 +/- 0.032 ppm read from /var/lib/chr...ift
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com systemd[1]: Started NTP client/server.
-Oct 12 11:20:14 devpod1-openstack-controller.cisco.com chronyd[25968]: Selected source 172.18.106.1
-Hint: Some lines were ellipsized, use -l to show in full.
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Nmap Options</div>
+  <div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 2 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button></div>
+<div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+  <!-- put the code here -->
+<pre>
+nmap -sV &lt;victim IP&gt;
 </pre>
-</div>
-</div>
+</div></div>
+<!-- end of copy /paste block -->
 
 
-<p>To get the information on the status of what chrony tracking, use <code>chronyc tracking</code>.</p>
+<h2>Exercise 2 : Add NMAP Results to Metasploit Database</h2>
 
 
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
 
 
-<div class="commandblock">
-    <div class="copyseqnumber">
-        2
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-2">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-2">
-<pre># This is the copy group: 2<br>
 
-<code>
-chronyc tracking
-</code>
 
-</pre>
-</div>
-</div>
 
 
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-<div class="commandblock">
-<div class="">
-<pre># chronyc tracking
-Reference ID    : 10.0.236.10 (ntp-vlan336.ecatsrtpdmz.cisco.com)
-Stratum         : 3
-Ref time (UTC)  : Tue Jan  6 14:42:10 2015
-System time     : 93476.671875000 seconds slow of NTP time
-Last offset     : -0.000186148 seconds
-RMS offset      : 3119.961914062 seconds
-Frequency       : 48.261 ppm fast
-Residual freq   : -0.011 ppm
-Skew            : 8.250 ppm
-Root delay      : 0.020065 seconds
-Root dispersion : 0.023922 seconds
-Update interval : 479.2 seconds
-Leap status     : Normal
-</pre>
-</div>
-</div>
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 2 - Configure HOSTS file for Name Resolution</h3>
-<p>Setting proper hostnames definition plays a key role in the setup of various components of OpenStack ( in particular
-    RabbitMQ - RabiitMQ will be discussed in the upcoming chapter). There are three things that need to match for
-    RabbitMQ to properly operate. The first part is that the hostname is correct in the file /etc/hosts. The second is
-    the environment variable HOSTNAME that is derived in the system. The third is the hostname definition in
-    /etc/hostname. </p>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        3
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-3">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-3" style="background-color: #e0ffcb;">
-<pre># This is the copy group: 3<br>
-
-<code>
-cat &lt;&lt;EOF &gt; /etc/hosts
-127.0.0.1   localhost localhost.localdomain
-10.0.236.101  pod01-compute1 pod01-compute1.ecatsrtpdmz.cisco.com
-EOF
-</code>
-
-</pre>
-</div>
-</div>
-
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        4
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-4">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-4">
-<pre># This is the copy group: 4<br>
-
-<code>
-cat &lt;&lt;EOF &gt; /etc/hostname
-pod01-compute1
-EOF
-</code>
-
-</pre>
-</div>
-</div>
-
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 3 - Disable Network Manager Service and enable network</h3>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        5
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-5">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-5" style="background-color: #e0ffcb;">
-<pre># This is the copy group: 5<br>
-
-<code>
-systemctl disable NetworkManager.service
-systemctl stop NetworkManager.service
-systemctl mask NetworkManager.service
-
-
-
-chkconfig network on
-systemctl restart network
-</code>
-
-</pre>
-</div>
-</div>
-
-
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 4 - Install OpenStack and OpenStack Utilities</h3>
-    <p>
-        For this lab we have setup a local repository with all the appropriate packages related to RedHat enterprise
-        Linux snapshot to specific package versions. This insures that the lab has consistent results since the upstream
-        code base is the same. In your production environment you will always want to create a repository and install
-        from the same base code to insure consistency when installing different compute hosts over time. We will
-        show more details on the package details for you in another chapter including inserting the Cisco OpFLex
-        packages into the repository to be able to install them automatically.
-    </p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        6
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-6">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-6">
-<pre># This is the copy group: 6<br>
-
-<code>
-yum -y install openstack-selinux openstack-utils
-</code>
-
-</pre>
-</div>
-</div>
-
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 5- Upgrade system packages</h3>
-    <p>
-        Upgrade all the packages from the original ISO PXEBOOT install disk.
-    </p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        7
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-7">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-7">
-<pre># This is the copy group: 7<br>
-
-<code>
-yum makecache
-yum -y upgrade
-</code>
-
-</pre>
-</div>
-</div>
-
-
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-
-<h3>Step 6 - Create OpenStack client environment scripts</h3>
-<p> OpenStack supports simple client environment scripts also known as OpenRC files. These scripts typically contain
-    common options for all clients,  but also support unique options.</p>
-<p>Create client environment scripts for the admin projects. Future portions of this guide
-    reference these scripts to load appropriate credentials for client operations.</p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        8
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-8">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-8">
-<pre># This is the copy group: 8<br>
-
-<code>
-cd ~
-cat &lt;&lt; EOF &gt; admin.sh
-export OS_REGION_NAME=RegionOne
-export OS_PROJECT_DOMAIN_ID=default
-export OS_USER_DOMAIN_ID=default
-export OS_PROJECT_NAME=admin
-export OS_TENANT_NAME=admin
-export OS_USERNAME=admin
-export OS_PASSWORD=cisco.123
-export OS_AUTH_URL=http://10.0.236.101:35357/v3
-export OS_NOVA_AUTH=http://10.0.236.101:5000/v2.0
-export PS1='[\u@\h \W(openstack_admin)]# '
-EOF
-chmod +x admin.sh
-</code>
-
-</pre>
-</div>
-</div>
-
-
-
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-<h3>Step 7 - Verify identity shell</h3>
-<p>You can validate that each shell is working properly by executing the shell command via the <code>#source</code>
-    command.</p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        9
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-9">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-9">
-<pre># This is the copy group: 9<br>
-
-<code>
-cd ~; source admin.sh
-</code>
-
-</pre>
-</div>
-</div>
 
 
 
@@ -606,8 +263,8 @@ cd ~; source admin.sh
     <div style="float:right; font-size: .9em;">
 
             <div class="btn-group">
-                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/pod1/basics/lldp&#39;">Next: LLDP Daemon</button>
-                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/pod1/basics/lldp&#39;">
+                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;module4.html&#39;">Next: Module 4</button>
+                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/module4.html&#39;">
                         <span class="glyphicon glyphicon-chevron-right" style="color:white;" aria-hidden="true"></span>
                 </button>
             </div>
