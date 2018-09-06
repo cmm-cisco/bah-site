@@ -15,7 +15,9 @@
             <link href="./os_files/style.css" rel="stylesheet">
             <link href="./os_files/cssterm.css" rel="stylesheet">
             <link href="./os_files/bootstrap-select.min.css" rel="stylesheet">
+
 <title>BAH Module 3</title>
+ <meta name="author" content="Omar Santos">
 
 </head>
 <body>
@@ -231,7 +233,7 @@ Add Server Version checks (-sV) to gain more information.</p>
 
 <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
 <div class="topbar">
-  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Nmap Options</div>
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Nmap Server Version Checks</div>
   <div class="topbarbutton"></div> </div>
 <div class="commandblock"> <div class="copyseqnumber"> 2 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-2">Copy</button></div>
 <div class="ciscohl2" id="copy-2" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
@@ -250,7 +252,7 @@ nmap -sV &lt;victim IP&gt;
 Start the postgresql service:
 <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
 <div class="topbar">
-  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Nmap Server Version Checks</div>
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Starting postgresql</div>
   <div class="topbarbutton"></div> </div>
 <div class="commandblock"> <div class="copyseqnumber"> 3 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-3">Copy</button></div>
 <div class="ciscohl2" id="copy-3" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
@@ -266,7 +268,7 @@ Initialize the msf database:
 
 <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
 <div class="topbar">
-  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Nmap Options</div>
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Initializing the msf Database</div>
   <div class="topbarbutton"></div> </div>
 <div class="commandblock"> <div class="copyseqnumber"> 4 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-4">Copy</button></div>
 <div class="ciscohl2" id="copy-4" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
@@ -283,7 +285,7 @@ msfdb init
 
 <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
 <div class="topbar">
-  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Nmap Options</div>
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Metasploit Console</div>
   <div class="topbarbutton"></div> </div>
 <div class="commandblock"> <div class="copyseqnumber"> 5 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-5">Copy</button></div>
 <div class="ciscohl2" id="copy-5" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
@@ -296,21 +298,142 @@ msfconsole
 
 
 <pre>
-# <strong>msfconsole <strong>
+# <strong>msfconsole </strong>
 ...
        =[ metasploit v4.9.2-2014042301 [core:4.9 api:1.0] ]
 + -- --=[ 1301 exploits - 778 auxiliary - 220 post ]
 + -- --=[ 335 payloads - 35 encoders - 8 nops      ]
 
-</pre>
-
-msf > db_[TAB][TAB]
+msf > <strong>db_[TAB][TAB]</strong>
 db_connect        db_export         db_nmap           db_status
 db_disconnect     db_import         db_rebuild_cache
+
+</pre>
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>DB Status</div>
+  <div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 6 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-6">Copy</button></div>
+<div class="ciscohl2" id="copy-6" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+  <!-- put the code here -->
+  <pre>
+db_status
+  </pre>
+  </div></div>
+  <!-- end of copy /paste block -->
+<pre>
 msf > db_status
 [*] postgresql connected to msf
 msf >
 </pre>
+
+
+
+<h3>Task 4</h3>
+<p>Using&nbsp;<tt>db_nmap</tt>&nbsp;instead of&nbsp;<tt>nmap</tt>, run the same commands you ran in Exercise 1 to load information into the database. This information will stay persistent for successive modules. You should be able to run the&nbsp;<tt>services</tt>&nbsp;command and see the services found by nmap at anytime without scanning again.</p>
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Using db_nmap</div>
+  <div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 7 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-7">Copy</button></div>
+<div class="ciscohl2" id="copy-7" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+  <!-- put the code here -->
+  <pre>
+services  </pre>
+  </div></div>
+  <!-- end of copy /paste block -->
+
+<pre>
+  msf > services
+
+  Services
+  ========
+
+  host         port   proto  name           state  info
+  ----         ----   -----  ----           -----  ----
+  192.168.1.2  22     tcp    ssh            open   OpenSSH 6.0p1 Debian 4+deb7u1 protocol 2.0
+  192.168.1.2  3790   tcp    http           open   nginx
+  192.168.1.2  5800   tcp    vnc-http       open   x11vnc
+  192.168.1.2  5900   tcp    vnc            open   VNC protocol 3.7
+  192.168.1.3  21     tcp    ftp            open   vsftpd 2.3.4
+  192.168.1.3  22     tcp    ssh            open   OpenSSH 4.7p1 Debian 8ubuntu1 protocol 2.0
+  192.168.1.3  23     tcp    telnet         open   Linux telnetd
+  192.168.1.3  25     tcp    smtp           open   Postfix smtpd
+  192.168.1.3  53     tcp    domain         open   ISC BIND 9.4.2
+  ...
+</pre>
+
+
+<h2>Exercise 3 : Using Wireshark</h2>
+<h3>Task 1</h3>
+Open Wireshark and listen to the eth1 network interface. What protocols are present?
+
+<pre>
+  You may only see BROADCAST traffic but it may be informative.
+  Filter for:
+   * arp
+   * netbios
+   * rip
+   * udp.port != 1985
+   * etc..
+</pre>
+
+<h2>Exercise 4 : DNS Reconnaissance</h2>
+<h3>Task 1</h3>
+<p>Do a&nbsp;<a class="http" href="http://en.wikipedia.org/wiki/DNS_zone_transfer">zone transfer</a>&nbsp;of&nbsp;<strong><tt>seccon.ninja</tt></strong>&nbsp;domain using the&nbsp;<tt>dig</tt>&nbsp;(<a class="https" href="https://www.madboa.com/geek/dig/">domain information groper</a>) tool</p>
+
+Install dig with the following command:
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Installing dig</div>
+  <div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 8 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-8">Copy</button></div>
+<div class="ciscohl2" id="copy-8" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+  <!-- put the code here -->
+  <pre>
+apt-get install dnsutils
+  </pre>
+  </div></div>
+  <!-- end of copy /paste block -->
+
+
+If the domain you want to query allows DNS zone transfers, you can get those, too. The reality of life on the Internet, however, is that very few domains allow unrestricted transfers these days, and limit zone transfers to secondary name server IPs. You'll learn how to bypass IP access control lists later in the course.
+
+  <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+  <div class="topbar">
+    <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Using dig</div>
+    <div class="topbarbutton"></div> </div>
+  <div class="commandblock"> <div class="copyseqnumber"> 9 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-9">Copy</button></div>
+  <div class="ciscohl2" id="copy-9" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+    <!-- put the code here -->
+    <pre>
+dig seccon.ninja NS
+dig seccon.ninja AXFR
+    </pre>
+    </div></div>
+    <!-- end of copy /paste block -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
