@@ -230,7 +230,9 @@ line vty 0 4
 
 <h3>Task 1</h3>
 
-<p>Using&nbsp;<tt>tshark</tt>&nbsp;or&nbsp;<a class="http" href="http://wiresharkdownloads.riverbed.com/video/wireshark/introduction-to-wireshark/">Wireshark</a>, discover the SNMPv2 community string used in Traps sent to&nbsp;<strong>windows.seccon.ninja</strong>. The Get/Set community string uses the same password</p>
+<p>Using&nbsp;<tt>tshark</tt>&nbsp;or&nbsp;<a class="http" href="http://wiresharkdownloads.riverbed.com/video/wireshark/introduction-to-wireshark/">Wireshark</a>, discover the SNMPv2 community string used in Traps sent to&nbsp;<strong>windows.seccon.ninja</strong>. The Get/Set community string uses the same password.  Use ARP cache poisoning against the router to send the SNMPv2 trap to your kali box instead of windows.</p>
+
+<p><b>Omar:  Below is a cheat, can you please adapt?</b></p>
 
 <pre>
   root@bah-pod1-kali:~# <strong> host windows.seccon.ninja</strong>
