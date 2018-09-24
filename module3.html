@@ -394,22 +394,6 @@ Open Wireshark and listen to the eth1 network interface. What protocols are pres
 <h3>Task 1</h3>
 <p>Do a&nbsp;<a class="http" href="http://en.wikipedia.org/wiki/DNS_zone_transfer">zone transfer</a>&nbsp;of&nbsp;<strong><tt>seccon.ninja</tt></strong>&nbsp;domain using the&nbsp;<tt>dig</tt>&nbsp;(<a class="https" href="https://www.madboa.com/geek/dig/">domain information groper</a>) tool</p>
 
-Install dig with the following command:
-
-<!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
-<div class="topbar">
-  <div class="topbartitle" style="font-size:.8em;"><i class="fa fa-server" style="margin-right:10px;display:inline;"></i>Installing dig</div>
-  <div class="topbarbutton"></div> </div>
-<div class="commandblock"> <div class="copyseqnumber"> 8 <button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-8">Copy</button></div>
-<div class="ciscohl2" id="copy-8" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
-  <!-- put the code here -->
-  <pre>
-apt-get install dnsutils
-  </pre>
-  </div></div>
-  <!-- end of copy /paste block -->
-
-
 If the domain you want to query allows DNS zone transfers, you can get those, too. The reality of life on the Internet, however, is that very few domains allow unrestricted transfers these days, and limit zone transfers to secondary name server IPs. You'll learn how to bypass IP access control lists later in the course.
 
   <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
