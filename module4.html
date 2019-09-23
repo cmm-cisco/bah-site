@@ -489,7 +489,7 @@ password: &lt;removed&gt;
 <h2>Exercise 2 : Break into the IOS router at the center of the network using TELNET and the administrator username and password.</h2>
 
 <h3>Task 1</h3>
-<p>The administrator is only allowed to log in from&nbsp;<strong>windows.seccon.ninja</strong>. Without logging into this machine, figure out how to bypass this. See the&nbsp;<strong>Bonus</strong>&nbsp;section below.</p>
+<p>The administrator is only allowed to log in from&nbsp;<strong>metasploitable.seccon.ninja</strong>. Without logging into this machine, figure out how to bypass this. See the&nbsp;<strong>Bonus</strong>&nbsp;section below.</p>
 
 
 <!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
@@ -548,13 +548,14 @@ Sent 1 packets.
 <hr><br>
 Log in
 <pre>
-root@bah-pod1-kali:~/labs/networking# ssh admin@router
+root@bah-pod1-kali:~/labs/networking# telnet router
 
                                 NOTICE
 
   Use of this system is RESTRICTED. Access is limited to individuals
   authorized by Cisco SecCon...
 
+Username: admin
 Password:
 ...
 router#
