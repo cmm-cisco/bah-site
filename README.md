@@ -10,7 +10,7 @@ weaknesses starting from basic network reconnaissance, service and
 vulnerability enumeration, initial and secondary exploitation, evasion and
 exploit writing.
 
-More information can be found here:  https://becomingahacker.com
+More information can be found here: https://becomingahacker.com
 
 ## Learning Outcome
 
