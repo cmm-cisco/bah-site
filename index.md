@@ -19,7 +19,7 @@ The administration of this server, the content authors, and any associated parti
 ## Morning Session: Beginner
 
 - Introduction to Ethical Hacking
-- Building your Own Hacking Labls
+- Building your Own Hacking Lab(s)
 - Passive and Active Reconnaissance
 - Introduction to Web Application Hacking
 - Introduction to Post-Exploitation Techniques
@@ -31,3 +31,10 @@ The administration of this server, the content authors, and any associated parti
 - Introduction to Network Hacking
 - Intermediate to Advanced Post-Exploitation Techniques
 - Using AI for Hacking and Cybersecurity Operations
+
+## Logistics
+Instructions to access the lab:
+- You will be assigned a pod and a set of credentials to access the lab.
+- Connect to https://becomingahacker.com and login with your credentials.
+- You should be able to access a Kali Linux machine running [WebSploit Labs](https://websploit.org/).
+- The instructors will provide you with additional instructions and demonstrate how to access the environment.
