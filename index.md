@@ -1,3 +1,5 @@
+<title>Becoming a Hacker</title>
+
 # Becoming a Hacker Training
 
 This is a test
