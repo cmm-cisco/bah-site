@@ -35,6 +35,7 @@ The administration of this server, the content authors, and any associated parti
 ## Logistics
 Instructions to access the lab:
 - You will be assigned a pod and a set of credentials to access the lab.
-- Connect to https://becomingahacker.com and login with your credentials.
+- Connect to [https://becomingahacker.com](https://becomingahacker.com) and login with your credentials.
 - You should be able to access a Kali Linux machine running [WebSploit Labs](https://websploit.org/).
 - The instructors will provide you with additional instructions and demonstrate how to access the environment.
+- Access the lab guide [here](https://becomingahacker.com/training/lab-guide).
