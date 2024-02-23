@@ -1,11 +1,4 @@
----
-layout: post
-title: Becoming a Hacker Bootcamp
-
----
-
-
-<img width="530" alt="image" src="https://github.com/becomingahacker/bah-foundations-site/assets/1690898/dfaae4f7-9776-43cd-95a8-ffdab45ca3f7">
+<img width="574" alt="image" src="https://github.com/becomingahacker/bah-foundations-site/assets/1690898/5f30bc3d-749e-4319-af51-080aef5b7a41">
 
 # Becoming a Hacker Training
 
