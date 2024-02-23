@@ -1,3 +1,8 @@
+---
+layout: post
+title: Becoming a Hacker Bootcamp
+
+
 # Lab Guides
 
 The following are the lab guides for the morning and afternoon sessions:
