@@ -4,6 +4,8 @@ title: Becoming a Hacker Bootcamp
 
 ---
 
+<img width="574" alt="image" src="https://github.com/becomingahacker/bah-foundations-site/assets/1690898/63a86b44-8f27-49fd-8d8a-9ee283235d09">
+
 
 # Lab Guides
 
