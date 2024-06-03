@@ -34,16 +34,3 @@ Whiteboard, Projector with screen, Sound speakers for video
 ## Class Size
 
 40 students
-
-## Source Code Layout
-
-* `modules`: each module has its own markdown page here
-* `os_files`: a bunch of static pictures, js, css, etc.
-* `non-published`: stash stuff here that you don't wanna publish
-
-* `_config.yml`: Jekyll config
-* `_includes`: re-usable web components; these are called inside other files
-* `_layouts`: templates that wrap content
-* `_site`: when Jekyll builds the site, it puts it here by default
-
-Anything else (with some exceptions) in the root folder will be available to the site by default; e.g. `my_file.png` will be accessible in the website as `/my_file.png`.
