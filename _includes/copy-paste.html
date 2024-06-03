@@ -1,0 +1,12 @@
+<div class="topbar">
+	<div class="topbartitle" style="font-size:.8em;">{{ include.title }}</div>
+  <div class="topbarbutton"></div>
+</div>
+<div class="commandblock">
+	<div class="copyseqnumber"> 1 
+		<button class="btn btn-xs btn-danger copybutton" data-clipboard-target="#copy-1">Copy</button>
+	</div>
+	<div class="ciscohl2" id="copy-1" style="background: url(&quot;/static/images/ok.png&quot;) right bottom / 45px 45px no-repeat rgb(224, 255, 203);">
+		<pre>{{ include.code | markdownify }}</pre>
+	</div>
+</div>
