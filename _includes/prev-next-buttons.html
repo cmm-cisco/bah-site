@@ -1,15 +1,34 @@
-	<div class="nextsection">
-			<div style="float:left; font-size: .9em;">
+{% assign parts = page.url | remove: '.html' | split: '/' %}
+{% assign number_string = parts | last %}
+{% assign number = number_string | plus: 0 %}
 
-			</div>
-			<div style="float:right; font-size: .9em;">
+{% assign prev = number | minus: 1 %}
+{% assign next = number | plus: 1 %}
 
-							<div class="btn-group">
-									<button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;module4.html&#39;">Next: Module 4</button>
-									<button type="button" class="btn btn-md btn-success" onclick="window.location.href=&#39;/module4.html&#39;">
-													<span class="glyphicon glyphicon-chevron-right" style="color:white;" aria-hidden="true"></span>
-									</button>
-							</div>
-
-			</div>
+<div class="nextsection">
+	{% if prev > 1 %}
+	<div style="float:left; font-size: .9em;">
+		<div class="btn-group">
+			<a href="/modules/{{ prev }}">
+				<button type="button" class="btn btn-md btn-success">
+					<span class="glyphicon glyphicon-chevron-left" style="color:white;" aria-hidden="true"></span>
+				</button>
+				<button type="button" class="btn btn-md btn-success">Previous: Module {{ prev }}</button>
+			</a>
+		</div>
 	</div>
+	{% endif %}
+
+	{% if next < 9 %}
+	<div style="float:right; font-size: .9em;">
+		<div class="btn-group">
+			<a href="/modules/{{ next }}">
+				<button type="button" class="btn btn-md btn-success">Next: Module {{ next }}</button>
+				<button type="button" class="btn btn-md btn-success">
+					<span class="glyphicon glyphicon-chevron-right" style="color:white;" aria-hidden="true"></span>
+				</button>
+			</a>
+		</div>
+	</div>
+	{% endif %}
+</div>
