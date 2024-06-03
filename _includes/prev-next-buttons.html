@@ -5,11 +5,14 @@
 {% assign prev = number | minus: 1 %}
 {% assign next = number | plus: 1 %}
 
+{% assign prevlink = "/modules/" | append: prev | relative_url %}
+{% assign nextlink = "/modules/" | append: next | relative_url %}
+
 <div class="nextsection">
 	{% if prev > 1 %}
 	<div style="float:left; font-size: .9em;">
 		<div class="btn-group">
-			<a href="/modules/{{ prev }}">
+			<a href={{ prevlink }}>
 				<button type="button" class="btn btn-md btn-success">
 					<span class="glyphicon glyphicon-chevron-left" style="color:white;" aria-hidden="true"></span>
 				</button>
@@ -22,7 +25,7 @@
 	{% if next < 9 %}
 	<div style="float:right; font-size: .9em;">
 		<div class="btn-group">
-			<a href="/modules/{{ next }}">
+			<a href={{ nextlink }}>
 				<button type="button" class="btn btn-md btn-success">Next: Module {{ next }}</button>
 				<button type="button" class="btn btn-md btn-success">
 					<span class="glyphicon glyphicon-chevron-right" style="color:white;" aria-hidden="true"></span>

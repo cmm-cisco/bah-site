@@ -1,3 +1,6 @@
+url: "https://becomingahacker.com"
+baseurl: "/training"
+
 defaults:
   -
     scope:
