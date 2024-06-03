@@ -1,21 +1,4 @@
-<!--this is a hint, I tried to do it using a modal like the about section, ask me (Omar) if you run into any problems - change the hint #-->
-<a target="blank" data-toggle="modal" data-target="#Hint11" href="#">+ Click here for Hint</a>
-<div class="modal fade" id="Hint11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h3 class="modal-title" id="myModalLabel">Hint </h3>
-      </div>
-      <div class="modal-body">
-				<div class="row">
-					{{ include.text }}
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!--end hint -->
+<details>
+	<summary>+ Click here for Hint</summary>
+	{{ include.text }}
+</details>

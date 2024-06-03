@@ -24,7 +24,7 @@ h2{
 }
 
 h3{
-    /*border-bottom: 1px solid #e0e0e0;*/
+    border-bottom: 1px solid #e0e0e0;
     padding-bottom: 5px;
 }
 
@@ -34,6 +34,15 @@ p{
 
 textarea{
     font-family: monospace;
+}
+
+summary {
+    color: #2fa4e7;
+    cursor: pointer;
+}
+
+summary:hover {
+    text-decoration: underline;
 }
 
 /*
