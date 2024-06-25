@@ -1,5 +1,5 @@
 url: "https://becomingahacker.com"
-baseurl: "/training"
+# baseurl: "/training"
 
 defaults:
   -
