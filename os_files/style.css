@@ -76,6 +76,10 @@ pre[class="coding"]{
 
 }
 
+table {
+	border: 2px solid black;
+}
+
 table.table-exercise td{
     font-family: monospace;
     font-size:.9em;
@@ -529,7 +533,7 @@ pre{
 
 code{
     background: white;
-    background-color: white;
+    background-color: #eaecee;
 }
 
 
