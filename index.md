@@ -47,4 +47,4 @@ Click on the dropdown Menu in the top navigation bar to access the lab instructi
 
 ## Resources
 
-Navigate to the [Resources](/training/resources.html) page to obtain the presentations used in this class, as well as other resources on how to build your own lab.
+Navigate to the [Resources](/resources.html) page to obtain the presentations used in this class, as well as other resources on how to build your own lab.
