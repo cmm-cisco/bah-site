@@ -52,6 +52,12 @@ research, exploit development, and reverse engineering:
 
 - <https://theartofhacking.org/github>
 
+## WebSploit
+
+WebSploit Labs is a learning environment created by Omar Santos for different Cybersecurity Ethical Hacking, Bug Hunting, Incident Response, Digital Forensics, and Threat Hunting training sessions. WebSploit Labs includes several intentionally vulnerable applications running in Docker containers on top of Kali Linux or Parrot Security OS, several additional tools, and over 9,000 cybersecurity resources.
+
+* <https://websploit.org/>
+
 ## Shameless Plug
 
 - [The Art of Hacking Series (Offensive Security Video on
