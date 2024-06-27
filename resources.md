@@ -11,11 +11,7 @@ layout: default
 
 ## Class Presentations
 
--   [Link to Box](https://cisco.box.com/s/qdxjoyd7hrl8sfq8yhw9x6z0rm5w5xvg)
-
-## RealVNC Viewer
-
--   [RealVNC Viewer Download](https://www.realvnc.com/en/connect/download/viewer/windows/)
+-   [Link to Box](https://cisco.box.com/s/htxba0p706e335zskbixm0244aysjz9w)
 
 ## Metasploitable
 
@@ -37,19 +33,17 @@ In the current version as of this writing, the applications are:
 
 **Downloads**:
 
--   [Metasploitable 2 Download](https://information.rapid7.com/metasploitable-download.html?LS=1631875&CS=web)
+- [Metasploitable 2 Download](https://information.rapid7.com/metasploitable-download.html?LS=1631875&CS=web)
 
--   [Metasploitable Documentation](https://community.rapid7.com/docs/DOC-1875)
+- [Metasploitable Documentation](https://community.rapid7.com/docs/DOC-1875)
 
 ## Kali Linux
 
--   [Original Kali Linux](https://www.kali.org/)
+- [Kali Linux](https://www.kali.org/)
 
--   [Cisco CSDL Kali Linux Distribution including CSDL Security Test
-    Platform](https://apps.na.collabserv.com/wikis/home?lang=en-us#!/wiki/Wd9b7eba74a00_4ab6_90ab_a6fc5d901046/page/CSDL%20Kali%20Linux%20User%20Guide)
+## Becoming a Hacker GitHub Org
 
--   [Cisco STAT\'s Kali Linux
-    Distribution](https://stat.cisco.com/statwiki/SecurityToolsVirtualImage)
+- [Becoming a Hacker](https://github.com/becomingahacker)
 
 ## The Art of Hacking GitHub repository
 
