@@ -19,10 +19,10 @@ This training contains materials that can be potentially damaging or dangerous. 
 
 ```
 1000 - 1130  (Module 1) Introduction
-1130 - 1145         ** B R E A K **
+1130 - 1145         ** L U N C H **
 1145 - 1300  (Module 2) Passive Reconnaissance
 1300 - 1330  (Module 3) Active Reconnaissance
-1330 - 1430         ** L U N C H **
+1330 - 1430         ** B R E A K **
 1430 - 1530  (Module 3) Active Reconnaissance
 1530 - 1630  (Module 4) Networking
 1630 - 1645         ** B R E A K **
@@ -33,9 +33,9 @@ This training contains materials that can be potentially damaging or dangerous. 
 
 ```
 1000 - 1130  (Module 5) Wireless
-1130 - 1145      ** B R E A K **
+1130 - 1145      ** L U N C H **
 1145 - 1330  (Module 6) Web Applications
-1330 - 1430      ** L U N C H **
+1330 - 1430      ** B R E A K **
 1430 - 1630  (Module 7)  Accounts and Passwords
 1630 - 1645      ** B R E A K **
 1645 - 1830  Conclusion
