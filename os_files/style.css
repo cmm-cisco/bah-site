@@ -567,3 +567,15 @@ td {
 table tr:nth-child(even) td {
 	background-color: #E0E0E0;
 }
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3rem;
+	margin-bottom: 5rem;
+}
+
+li {
+	margin-bottom: 1rem;
+}

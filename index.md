@@ -28,7 +28,7 @@ This training contains materials that can be potentially damaging or dangerous. 
 | 16:00 | 16:15 |        | *Break*                |
 | 16:45 | 18:30 | 4      | Networking             |
 
-All times are in **EST**!
+* All times are in **EST**
 
 ### Day 2
 
@@ -43,7 +43,7 @@ All times are in **EST**!
 | 16:40 | 16:45 |        | *Break*              |
 | 16:45 | 18:30 |        | Conclusion           |
 
-All times are in **EST**!
+* All times are in **EST**!
 
 ## Labs
 
