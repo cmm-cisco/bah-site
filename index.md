@@ -15,31 +15,35 @@ This training contains materials that can be potentially damaging or dangerous. 
 
 ## Schedule
 
-### Day One
+### Day 1
 
-```
-1000 - 1130  (Module 1) Introduction
-1130 - 1145         ** L U N C H **
-1145 - 1300  (Module 2) Passive Reconnaissance
-1300 - 1330  (Module 3) Active Reconnaissance
-1330 - 1430         ** B R E A K **
-1430 - 1530  (Module 3) Active Reconnaissance
-1530 - 1630  (Module 4) Networking
-1630 - 1645         ** B R E A K **
-1645 - 1830  (Module 4) Networking
-```
+| Start | End   | Module | Content                |
+|-------|-------|--------|------------------------|
+| 10:00 | 11:00 | 1      | Introduction           |
+| 11:00 | 12:00 |        | *Lunch*                |
+| 12:00 | 13:30 | 2      | Passive Reconnaissance |
+| 13:30 | 13:45 |        | *Break*                |
+| 13:45 | 15:00 | 3      | Active Reconnaissance  |
+| 15:00 | 16:00 | 4      | Networking             |
+| 16:00 | 16:15 |        | *Break*                |
+| 16:45 | 18:30 | 4      | Networking             |
 
-### Day Two
+* All times are in **EST**
 
-```
-1000 - 1130  (Module 5) Wireless
-1130 - 1145      ** L U N C H **
-1145 - 1330  (Module 6) Web Applications
-1330 - 1430      ** B R E A K **
-1430 - 1630  (Module 7)  Accounts and Passwords
-1630 - 1645      ** B R E A K **
-1645 - 1830  Conclusion
-```
+### Day 2
+
+| Start | End   | Module | Content              |
+|-------|-------|--------|----------------------|
+| 10:00 | 11:30 | 5      | Wireless             |
+| 11:30 | 12:30 |        | *Lunch*              |
+| 12:30 | 14:00 | 6      | Web Applications     |
+| 14:00 | 14:15 |        | *Break*              |
+| 14:15 | 15:30 | 6      | Web Applications     |
+| 15:30 | 16:30 | 7      | Accounts & Passwords |
+| 16:40 | 16:45 |        | *Break*              |
+| 16:45 | 18:30 |        | Conclusion           |
+
+* All times are in **EST**!
 
 ## Labs
 
